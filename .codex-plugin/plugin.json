@@ -1,0 +1,28 @@
+{
+  "name": "hooman",
+  "version": "0.1.0",
+  "description": "Clear, natural writing that preserves meaning and fits the audience.",
+  "author": {
+    "name": "hongymagic",
+    "url": "https://github.com/hongymagic"
+  },
+  "homepage": "https://github.com/hongymagic/hooman",
+  "repository": "https://github.com/hongymagic/hooman",
+  "license": "MIT",
+  "keywords": ["writing", "editing", "human-writing"],
+  "skills": "./human-writing",
+  "interface": {
+    "displayName": "Hooman",
+    "shortDescription": "Clear writing, faithful to your meaning",
+    "longDescription": "Draft, edit, or review prose using your facts, audience, and voice. Includes the human-writing skill.",
+    "developerName": "hongymagic",
+    "category": "Productivity",
+    "capabilities": ["Read", "Write"],
+    "websiteURL": "https://github.com/hongymagic/hooman",
+    "defaultPrompt": [
+      "Use human-writing to tighten this draft.",
+      "Use human-writing to draft an update from these facts.",
+      "Use human-writing to review this prose without rewriting."
+    ]
+  }
+}

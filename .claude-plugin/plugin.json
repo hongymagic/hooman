@@ -1,0 +1,14 @@
+{
+  "name": "hooman",
+  "version": "0.1.0",
+  "description": "Clear, natural writing that preserves meaning and fits the audience.",
+  "author": {
+    "name": "hongymagic",
+    "url": "https://github.com/hongymagic"
+  },
+  "homepage": "https://github.com/hongymagic/hooman",
+  "repository": "https://github.com/hongymagic/hooman",
+  "license": "MIT",
+  "keywords": ["writing", "editing", "human-writing"],
+  "skills": "./human-writing"
+}
