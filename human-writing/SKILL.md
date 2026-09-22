@@ -55,9 +55,6 @@ they help the reader. Respect required templates and document structure.
   it does not supply facts for a new document. Do not reproduce its factual mistakes.
   Without samples, use the requested register and document conventions. An ADR can
   remain neutral and technical; it does not need conversational warmth or a sales pitch.
-- **Remove what adds no meaning.** Cut empty openings, repeated conclusions, redundant
-  transitions and commentary about the act of writing. Keep courtesy that serves the
-  relationship. Prefer a direct verb to a padded noun phrase when the meaning stays intact.
 - **Make the structure serve the purpose.** Put the main point, decision or action where
   readers need it. For instructions, number steps when order matters and distinguish
   required actions from optional context. Keep each requested action with its supplied
@@ -65,6 +62,11 @@ they help the reader. Respect required templates and document structure.
   necessary choices or qualifications. Follow expressed reading preferences, including
   requests for connected prose. Preserve an intentional narrative sequence when it
   matters to the piece.
+- **Make explanations natural.** Name the thing and say what it does. Prefer familiar,
+  precise verbs to inflated noun phrases. Connect sentences through their meaning
+  instead of adding stock transitions. Explain unfamiliar terms in context; use a
+  supplied example when it helps. Keep evidence and its limits together. These are
+  phrasing choices, not a compulsory article outline.
 - **Use supported specifics.** Replace an inflated claim with relevant supplied evidence.
   If there is no evidence, narrow the claim only as far as the source supports, or flag
   it. Never invent metrics, examples, causes, actors or benefits to make prose concrete.
@@ -81,6 +83,30 @@ they help the reader. Respect required templates and document structure.
   of the same claim. Retain evidence limits and distinctions between known, inferred,
   possible, proposed and committed. Words such as “may”, “suggests” and “subject to”
   can carry essential meaning.
+
+## Prohibited shortcuts
+
+Do not generate these forms of padding or leave them in an edit. Rewrite or remove
+the offending passage while preserving its substantive information:
+
+- **Empty framing:** stock scene-setting, announcements of the act of writing and
+  previews that delay the point without orienting the reader.
+- **Hollow reframing:** “not X, but Y” slogans that supply no meaningful distinction,
+  or dismiss an alternative the source never raised.
+- **Manufactured suspense:** question-and-answer punchlines that merely announce the
+  next fact; short fragments stacked to make an ordinary claim sound momentous.
+- **Unsupported stature:** claims of consensus, authority, novelty or importance
+  without supplied support; interchangeable praise standing in for an explanation.
+- **Repetitive scaffolding:** strings of near-synonyms, a grand lesson after every
+  paragraph, or a closing recap that repeats the result without a useful implication.
+
+These prohibit editorial defects, not words or punctuation. Preserve an actual
+contrast, a question that addresses a reader's concern, a conclusion with a necessary
+condition, and the author's effective humour. Keep courtesy and orientation that
+serve the audience. Protected quotations,
+code and literal artefacts remain unchanged. Use the optional
+[examples](references/examples.md#patterns-to-remove-and-devices-to-keep) to distinguish
+empty devices from useful ones; do not apply English templates mechanically elsewhere.
 
 ## Fidelity and artefact protection
 

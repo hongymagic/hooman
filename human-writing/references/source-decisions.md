@@ -19,6 +19,16 @@ All four sources were available. These are snapshot claims, not promises that
 their default branches remain unchanged. No upstream benchmark or detector
 accuracy claim was adopted as evidence of this skill's writing quality.
 
+## Published writing samples
+
+The later [writing-craft review](style-sources.md) examines selected OpenAI,
+Anthropic, Netflix TechBlog and Zach Holman posts, including Holman's UTC talk.
+It records dates, reading scope and selective observations about phrasing, rhythm
+and voice. These samples inform original examples and clearer boundaries around
+empty rhetorical devices; they do not supply a mandatory technical article format
+or override the editorial priorities below. Article content is not bundled or
+covered by the upstream skill repositories' MIT licences.
+
 ## Editorial synthesis
 
 The original three sources share useful ideas: removing padded openings and

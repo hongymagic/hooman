@@ -17,12 +17,15 @@ The host controls discovery and explicit invocation syntax.
 For platform installation, downloadable bundles and release instructions, see the
 [hooman repository](https://github.com/hongymagic/hooman#readme).
 
-Optional [examples](references/examples.md) explain editorial choices;
+Optional [examples](references/examples.md) explain editorial choices, from plain
+verbs and natural cadence to useful contrasts and empty slogans;
 [source decisions](references/source-decisions.md) record the inspected upstream commits
-and synthesis. [Evaluation cases](evals/cases.md) define observable outcomes without
+and synthesis. [Writing samples](references/style-sources.md) document the later
+review of OpenAI, Anthropic, Netflix and Zach Holman posts.
+[Evaluation cases](evals/cases.md) define observable outcomes without
 requiring exact rewrites. These resources are not loaded for ordinary writing tasks.
-The [latest evaluation record](evals/v0.1.1/results.md) compares the structure refinement
-with the previous skill and links the original baseline/assisted evaluation.
+The [latest evaluation record](evals/v0.2.0/results.md) compares the phrasing refinement
+with the previous skill and links earlier evaluations.
 
 Read [NOTICE.md](NOTICE.md) and the bundled licences for attribution. The instructions
 can reduce avoidable editorial drift, but a model can still misunderstand evidence or

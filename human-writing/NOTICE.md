@@ -30,3 +30,9 @@ also excluded. Their licences are not replaced by the repositories' MIT notices.
 The [source decision record](references/source-decisions.md) identifies the exact
 commits inspected and explains the changes. All examples and evaluation cases in
 this package were created for this project.
+
+The [published writing samples](references/style-sources.md) from OpenAI,
+Anthropic, Netflix TechBlog and Zach Holman are cited for editorial observations.
+No article passages, code, images or distinctive anecdotes are reproduced. Those
+articles retain their respective rights; this package's MIT licence does not
+relicense them or imply endorsement by their authors.

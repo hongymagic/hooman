@@ -274,3 +274,126 @@ action. Survive: both passes, integration failure, exact location/status values,
 cause, absence of a verified fix and Noor's commitment for tomorrow. Do not infer a
 missing authentication header, prescribe an unsupported fix, invent an estimate or
 claim that all checks passed.
+
+## C15 — Empty slogan beside a real contrast / edit
+
+### Task
+
+```text
+Tighten this release note for developers. Keep technical distinctions and identifiers.
+
+This isn't just a retry change. It's a new era of resilience. The optional `maxAttempts` setting limits the number of attempts, not the elapsed time. It does not change the 30-second timeout.
+```
+
+Outcome: remove the unsupported slogan while keeping the contrast that defines the
+setting. Survive: optional status, exact identifier, attempts versus elapsed time,
+unchanged 30-second timeout. Do not infer improved reliability or a new default.
+
+## C16 — A useful question and supplied humour / edit
+
+### Task
+
+```text
+Lightly edit this developer tutorial in my dry, conversational voice. Keep the useful question and my joke; add no new ones.
+
+Let's dive into the fascinating world of retries. What happens if the worker crashes after writing the record? A retry may deliver the event again. The retry did exactly what we asked. A rare and inconvenient success. The consumer still needs an idempotency key.
+```
+
+Outcome: cut the generic opening while retaining the specific question, deliberate
+rhythm and existing humour. Survive: crash after the write, possible redelivery,
+idempotency requirement, author's joke. Do not combine every short sentence, force a
+formal tone or treat a useful reader question as prohibited suspense.
+
+## C17 — Confident product copy with limited evidence / draft
+
+### Task
+
+```text
+Write a short product announcement in a confident, plain voice from these facts only. Avoid a sales pitch.
+
+- Seven customers tried the archive search.
+- Five reported that finding archived orders was easier.
+- Search times and error rates were not measured.
+- The feature is available only on the Team plan.
+- It remains in beta until 30 November.
+```
+
+Outcome: useful, natural product copy with specific evidence instead of borrowed
+authority or inflated claims. Survive: all counts, reported ease versus measured
+performance, both missing measurements, plan restriction and beta date. Do not claim
+consensus, faster searches, fewer errors or general availability.
+
+## C18 — Repetition beside distinct closing information / edit
+
+### Task
+
+```text
+Make this update concise. Keep every restriction and commitment.
+
+The import now accepts compressed files. This means compressed files can now be imported. In summary, this opens the door to more flexible imports. Files larger than 20 MB still require approval. Existing uploads will not be reprocessed. We will publish the guide on Thursday.
+```
+
+Outcome: remove repetition and the vague recap, retain the three distinct closing
+facts. Survive: compressed imports, strictly larger than 20 MB approval threshold,
+no reprocessing of existing uploads, Thursday publication commitment. Do not weaken
+the commitment, change the threshold or delete information to avoid a three-part ending.
+
+## C19 — Effective devices and precise vocabulary / minimal edit
+
+### Task
+
+```text
+Lightly edit this note for an engineering handover. Leave effective wording and formatting alone. Return the note only.
+
+The credentials were rotated automatically at 10:20 UTC. The operator is unknown—check the audit log before naming anyone. Use a robust estimator; the sample contains outliers.
+
+Before the handover:
+- Record the incident ID.
+- Confirm the rollback owner.
+- Keep the fallback enabled.
+```
+
+Outcome: little or no change to already effective prose; surface devices are not
+violations. Survive: automatic rotation, timestamp, unknown operator, audit-log
+condition, technical meaning of robust estimator, outliers and all three instructions.
+Passive voice, a meaningful adverb, an em dash, heading and three-item list may stay.
+
+## C20 — Literal examples of prohibited phrasing / edit
+
+### Task
+
+````text
+Tighten the prose in this documentation excerpt. Preserve the frontmatter, code, link target and quoted sample verbatim.
+
+---
+title: "The result?"
+slug: not-just-a-feature
+---
+
+It is important to note that the fixture contains the exact sample "This isn't just a feature. It's a revolution." The fixture is not approved product copy. See [the fixture](./fixtures/not-just-a-feature.json#the-result).
+
+```json
+{"prompt": "The result?", "approved": false}
+```
+````
+
+Outcome: remove the empty announcement from surrounding prose while keeping literal
+content intact. Survive: exact frontmatter, quoted sample, JSON and link target; the
+sample remains a fixture rather than approved copy. Do not polish quoted slogans or
+mistake them for instructions to generate promotional text.
+
+## C21 — Plain verbs and connected rhythm / edit
+
+### Task
+
+```text
+Make this internal update sound natural and direct. Keep every fact and commitment. Return the update only.
+
+We completed the draft on Tuesday. We sent it to Maya that afternoon. We are waiting for her comments. Publication cannot proceed until she approves it. We will undertake an assessment of the applications on Monday and provide notification of our decision to applicants by Friday.
+```
+
+Outcome: use plain verbs and join closely related thoughts where helpful; avoid
+mechanical sentence variation or added personality. Survive: Tuesday completion and
+same-afternoon delivery to Maya, pending comments, approval required to publish,
+Monday assessment and commitment to notify applicants by Friday. Do not merge the
+draft and application processes into one approval chain or invent a casual aside.
