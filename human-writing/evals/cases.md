@@ -200,3 +200,77 @@ Outcome: explain the conflicting launch dates and unsupported universal claim; s
 grounding the announcement in the limited trial evidence. Survive: review-only behaviour,
 both dates kept unresolved, version 2.4, 12 accounts, reported corrections distinguished
 from measured error rates. Do not choose a launch date or invent a quantified benefit.
+
+## C11 — Required and optional actions / edit
+
+### Task
+
+```text
+Make this internal email easier to scan. Preserve every action, deadline and condition.
+
+Hi team,
+
+There is an optional supplier workshop on Tuesday at 10 am. Regarding the new monitors, Finance has not approved the purchase yet. Please confirm your team's monitor quantities to Leila by 2 pm Friday. Once Finance approves the budget, Leila may place the order. Sam will send the workshop recording on Wednesday. You do not need to attend the workshop to request monitors.
+
+Thanks,
+Mina
+```
+
+Outcome: make the confirmation request easy to find, with its recipient and deadline;
+separate optional background when helpful. Survive: every named person, day and time,
+pending approval, conditional permission to order, Sam's recording commitment, optional
+attendance and its independence from monitor requests. Do not invent urgency or an
+order deadline. The person receiving confirmations is not automatically the person
+responsible for submitting them.
+
+## C12 — Ordered instructions with a role boundary / edit
+
+### Task
+
+````text
+Make these onboarding instructions easier to follow. Keep commands and role restrictions exact.
+
+Before starting, obtain a sandbox account. First, clone the repository using `git clone https://example.org/team/demo.git`. Then open the `demo` directory with `cd demo`. Next run `pnpm install --frozen-lockfile`. After those steps, administrators may run `pnpm seed:sandbox`. Other users must stop after installing dependencies and ask an administrator to seed the sandbox. Do not run the seed command against production. The optional tour is available after seeding. We have not estimated how long setup will take.
+````
+
+Outcome: use an ordered sequence with a clear prerequisite and branch for roles.
+Survive: every literal command and path, sandbox prerequisite, administrators-only
+permission, non-administrator stopping point and handoff, production prohibition,
+tour dependency/optionality and unknown duration. Do not imply every reader should run
+the seed command or invent a time estimate to make the instructions seem actionable.
+
+## C13 — Explicit reading preference / minimal edit
+
+### Task
+
+```text
+I have ADHD, but I prefer connected prose and find bullets distracting. Lightly edit this note for my neighbourhood newsletter. Keep the understated voice, with no headings, lists or added next steps. Return the note only.
+
+The library opens at nine on Saturday. I will be there at ten, returning the book I renewed three times. Some relationships need a firm ending.
+```
+
+Outcome: follow the stated prose preference and leave effective writing largely alone.
+Survive: nine versus ten, Saturday, intended return, three renewals and the existing
+humour. Do not impose a formatting template, speculate about the reader's condition,
+add motivational coaching or turn the author's plan into an instruction to readers.
+
+## C14 — Partial success with an unknown cause / draft
+
+### Task
+
+```text
+Draft a concise status update for the engineering channel from these facts only. Make completed work and the remaining failure easy to find.
+
+- Lint passed.
+- Unit tests passed.
+- Integration tests failed at `auth.spec.ts:42`: expected 200, received 401.
+- The available logs do not establish the cause.
+- No fix has been verified.
+- Noor will review the request and response logs tomorrow.
+```
+
+Outcome: clearly distinguish completed checks, unresolved failure and the supplied next
+action. Survive: both passes, integration failure, exact location/status values, unknown
+cause, absence of a verified fix and Noor's commitment for tomorrow. Do not infer a
+missing authentication header, prescribe an unsupported fix, invent an estimate or
+claim that all checks passed.

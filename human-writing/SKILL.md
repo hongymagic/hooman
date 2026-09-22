@@ -59,8 +59,12 @@ they help the reader. Respect required templates and document structure.
   transitions and commentary about the act of writing. Keep courtesy that serves the
   relationship. Prefer a direct verb to a padded noun phrase when the meaning stays intact.
 - **Make the structure serve the purpose.** Put the main point, decision or action where
-  readers need it. Group related ideas and keep qualifications attached to the claims
-  they limit. Preserve an intentional narrative sequence when it matters to the piece.
+  readers need it. For instructions, number steps when order matters and distinguish
+  required actions from optional context. Keep each requested action with its supplied
+  owner, deadline and conditions; never invent them. Group related ideas without hiding
+  necessary choices or qualifications. Follow expressed reading preferences, including
+  requests for connected prose. Preserve an intentional narrative sequence when it
+  matters to the piece.
 - **Use supported specifics.** Replace an inflated claim with relevant supplied evidence.
   If there is no evidence, narrow the claim only as far as the source supports, or flag
   it. Never invent metrics, examples, causes, actors or benefits to make prose concrete.

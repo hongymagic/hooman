@@ -13,17 +13,19 @@ hooks, installers, tests or workflows were executed.
 | [blader/humanizer](https://github.com/blader/humanizer/tree/9862685f575c65a8247f90369951df1b3416e3d6) | `9862685f575c65a8247f90369951df1b3416e3d6` | MIT, Siqi Chen, 2025 |
 | [hardikpandya/stop-slop](https://github.com/hardikpandya/stop-slop/tree/8da1f030185bdfe8471220585162991eaeb970e9) | `8da1f030185bdfe8471220585162991eaeb970e9` | MIT, Hardik Pandya, 2025 |
 | [Aboudjem/humanizer-skill](https://github.com/Aboudjem/humanizer-skill/tree/a58df065367550b6ce40ff3f648335018d8e0589) | `a58df065367550b6ce40ff3f648335018d8e0589` | MIT, Adam Boudjemaa, 2026 |
+| [ayghri/i-have-adhd](https://github.com/ayghri/i-have-adhd/tree/839872f9d1cd634fed642b4589ce7226199cc15f) | `839872f9d1cd634fed642b4589ce7226199cc15f` | MIT, Ayoub Ghriss, 2026 |
 
-All three sources were available. These are snapshot claims, not promises that
+All four sources were available. These are snapshot claims, not promises that
 their default branches remain unchanged. No upstream benchmark or detector
 accuracy claim was adopted as evidence of this skill's writing quality.
 
 ## Editorial synthesis
 
-The shared useful ideas are removing padded openings and repeated conclusions,
-making vague claims informative, addressing a real reader, improving sentence
-rhythm, and checking more than isolated vocabulary. All three can express these
-ideas as portable Markdown; none requires an external writing service.
+The original three sources share useful ideas: removing padded openings and
+repeated conclusions, making vague claims informative, addressing a real reader,
+improving sentence rhythm, and checking more than isolated vocabulary. The fourth
+source sharpens action visibility and sequence. These editorial techniques fit
+portable Markdown without an external writing service.
 
 The sources disagree about what takes priority. Human Writing resolves those
 disagreements in this order: facts, meaning and explicit user requirements;
@@ -106,6 +108,33 @@ reference rewrites introduce benchmarks, dates, token lifetimes, roles, paths an
 personal experiences absent from the input. New examples were written for Human
 Writing instead of importing these contradictory demonstrations.
 
+### ayghri/i-have-adhd
+
+**Retained:** make requested actions and supplied outcomes easy to find; keep
+related steps together and distinguish required work from optional context.
+Human Writing makes this concrete by keeping each action with its supplied
+owner, deadline and conditions, and numbering procedures when sequence matters.
+
+**Changed:** presentation guidance follows explicit reading preferences and
+document purpose. Connected prose remains appropriate when requested, and a
+narrative need not begin with an action. Grouping must preserve prerequisites,
+exceptions and necessary choices; it does not impose a fixed visible-item cap.
+This is an editorial refinement, not a diagnostic mode or a clinical-benefit
+claim. A diagnosis is not a substitute for the reader's stated preferences.
+
+**Rejected:** whole-session persistence and rule-injection hooks; invented time
+estimates, urgency, next actions or error causes; mandatory first/last-line
+templates; blanket bans on idioms, recaps or particular words. Unknown causes
+remain unknown, and effective prose does not need new formatting to comply.
+
+The upstream [evaluation report](https://github.com/ayghri/i-have-adhd/blob/839872f9d1cd634fed642b4589ce7226199cc15f/evals/RESULTS.md)
+reports 14 cases with three trials each on one pinned model, improved aggregate
+scores and a failed release gate. It identifies an impossible tool-use case with
+tools disabled, and a partial-success regression that invented an error cause.
+The suggested link to its cause-and-fix rule is the author's hypothesis. Raw
+result rows are not tracked in the inspected tree; these results were not
+independently reproduced and do not establish Human Writing's effectiveness.
+
 ## Tooling decisions
 
 | Inspected tooling | Value and limits | Decision |
@@ -117,6 +146,7 @@ Writing instead of importing these contradictory demonstrations.
 | Aboudjem's manual trigger cases | Separates activation from output behaviour; several expectations demand arbitrary bans or added specifics. | Retain outcome-based cases and explicit invariants; author new fixtures. |
 | Plugin manifests and release workflows | Portable discovery and repeatable distribution address the requested product. | Use current host documentation and one canonical skill; do not copy source-specific marketplace dispatches. |
 | Aboudjem's demo script, assets, site, launch material and attribution filter | The demo prints scripted scores and prose; it does not execute a writing model. Publishing machinery and attribution suppression do not improve editing. | Exclude them. |
+| Ayghri's evaluation runners and judge | Isolating personal configuration, recording model/settings, comparing identical requests and rotating anonymised condition labels improve comparison hygiene. The reported failed gate and unsupported-cause regression expose limits. | Retain useful comparison practices; exclude its numeric rubric, runner dependencies and persistence hook from the runtime. |
 
 No source tooling was benchmarked or executed. The assessments above come from
 source inspection, including explicit set-comparison limitations in the CLI's
@@ -153,10 +183,16 @@ files read or, where stated, indexed.
   licensing/attribution text search covered the remaining tree. Translated
   READMEs, site content, dependency locks and visual assets were not exhaustively
   reviewed; none is imported.
+- **Ayghri:** `skills/i-have-adhd/SKILL.md`, `README.md`, `LICENSE`,
+  `evals/{README,RESULTS,rubric}.md`, `evals/cases.jsonl` and
+  `hooks/always-on.mjs`; evaluation prompt construction in `scripts/judge.py`
+  and relevant runner configuration and measurement logic in `scripts/run_evals.py`.
+  Remaining tracked paths were inventoried, not exhaustively reviewed. No source
+  scripts, installers, hooks or model runners were executed.
 
 ## Licensing boundary
 
-The three root MIT licence files are preserved byte-for-byte under `licenses/`,
+The four root MIT licence files are preserved byte-for-byte under `licenses/`,
 with attribution in [NOTICE.md](../NOTICE.md). The Aboudjem CLI licence duplicates
 its root MIT notice; its code is not included.
 

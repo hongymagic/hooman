@@ -90,3 +90,19 @@ publishing.”
 
 A review need not pick a date or supply a replacement paragraph. Resolving the factual
 conflict requires information that stylistic editing cannot provide.
+
+## A visible action with its condition intact
+
+Before:
+
+> We also have an optional supplier briefing on Tuesday. As for the replacement screens, Finance has not yet approved the purchase. Please ask Leila to confirm the quantities by 11 am Monday. Leila can place the order once Finance approves it.
+
+Possible edit for an internal action note:
+
+> Please ask Leila to confirm the screen quantities by 11 am Monday. She can place the order once Finance approves the purchase; approval is still pending.
+>
+> The supplier briefing on Tuesday is optional.
+
+The requested action, named person and deadline stay together. The purchase condition
+and optional briefing remain visible. Making the note easier to scan does not mean
+inventing a purchase deadline or dropping the dependency on Finance.

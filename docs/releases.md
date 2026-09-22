@@ -21,11 +21,11 @@ ZIP entries have sorted paths, fixed timestamps and permissions, and no compress
 1. Update the stable semantic version in `VERSION`, `.codex-plugin/plugin.json`, `.claude-plugin/plugin.json`, and the plugin entry in `.claude-plugin/marketplace.json`. Update installation examples in `README.md` to that version. Pre-release version strings are deliberately unsupported by this small release pipeline.
 2. Revisit the evaluation cases when changing editorial behaviour. Record the model, conditions, actual outputs and limitations in `human-writing/evals/`; do not infer writing quality from packaging checks.
 3. Run `python3 scripts/package.py --check --tag v<version>`. Where available, validate the Claude source with `claude plugin validate --strict .claude-plugin/plugin.json` and `claude plugin validate --strict .claude-plugin/marketplace.json`.
-4. Commit the finished change on `main` and let **Check package** pass. Create and push an annotated `v<version>` tag pointing at that commit. For version 0.1.0, the commands are:
+4. Commit the finished change on `main` and let **Check package** pass. Create and push an annotated `v<version>` tag pointing at that commit. For version 0.1.1, the commands are:
 
    ```sh
-   git tag -a v0.1.0 -m "Release Hooman 0.1.0"
-   git push origin v0.1.0
+   git tag -a v0.1.1 -m "Release Hooman 0.1.1"
+   git push origin v0.1.1
    ```
 
 5. The **Release** workflow checks the exact tag/version match, builds and validates the archives, then publishes a GitHub Release with both ZIPs and checksums. Open the resulting release and confirm all three assets are attached. It does not submit anything to an OpenAI or Anthropic directory.

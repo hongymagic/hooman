@@ -1,4 +1,7 @@
-# Evaluation record — 22 September 2026
+# Evaluation record — v0.1.0, 22 September 2026
+
+This record describes the original v0.1.0 skill.
+The [v0.1.1 comparison](v0.1.1/results.md) covers the later structure refinement.
 
 Behavioural evaluation **was run**. It found useful behaviour in both conditions,
 with mostly ties; this small comparison does not demonstrate a general quality

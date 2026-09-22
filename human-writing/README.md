@@ -21,8 +21,8 @@ Optional [examples](references/examples.md) explain editorial choices;
 [source decisions](references/source-decisions.md) record the inspected upstream commits
 and synthesis. [Evaluation cases](evals/cases.md) define observable outcomes without
 requiring exact rewrites. These resources are not loaded for ordinary writing tasks.
-The [evaluation record](evals/results.md) includes baseline and assisted outputs and
-reports the observed tradeoffs and limits.
+The [latest evaluation record](evals/v0.1.1/results.md) compares the structure refinement
+with the previous skill and links the original baseline/assisted evaluation.
 
 Read [NOTICE.md](NOTICE.md) and the bundled licences for attribution. The instructions
 can reduce avoidable editorial drift, but a model can still misunderstand evidence or

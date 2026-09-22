@@ -7,6 +7,7 @@ Human Writing is an original editorial synthesis informed by these projects:
 | [blader/humanizer](https://github.com/blader/humanizer) | Copyright (c) 2025 Siqi Chen | [MIT](licenses/blader-humanizer-MIT.txt) |
 | [hardikpandya/stop-slop](https://github.com/hardikpandya/stop-slop) | Copyright (c) 2025 Hardik Pandya | [MIT](licenses/stop-slop-MIT.txt) |
 | [Aboudjem/humanizer-skill](https://github.com/Aboudjem/humanizer-skill) | Copyright (c) 2026 Adam Boudjemaa | [MIT](licenses/aboudjem-humanizer-skill-MIT.txt) |
+| [ayghri/i-have-adhd](https://github.com/ayghri/i-have-adhd) | Copyright (c) 2026 Ayoub Ghriss | [MIT](licenses/ayghri-i-have-adhd-MIT.txt) |
 
 Their MIT notices are reproduced unchanged. This package rewrites and combines
 editorial ideas; it does not reproduce the upstream skill files, pattern
