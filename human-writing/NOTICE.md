@@ -1,38 +1,18 @@
 # Attribution and licensing
 
-Human Writing is an original editorial synthesis informed by these projects:
+Human Writing includes original guidance informed by the following MIT-licensed
+projects. The project links identify the commits inspected during synthesis.
 
 | Project | Copyright notice | Preserved licence |
 | --- | --- | --- |
-| [blader/humanizer](https://github.com/blader/humanizer) | Copyright (c) 2025 Siqi Chen | [MIT](licenses/blader-humanizer-MIT.txt) |
-| [hardikpandya/stop-slop](https://github.com/hardikpandya/stop-slop) | Copyright (c) 2025 Hardik Pandya | [MIT](licenses/stop-slop-MIT.txt) |
-| [Aboudjem/humanizer-skill](https://github.com/Aboudjem/humanizer-skill) | Copyright (c) 2026 Adam Boudjemaa | [MIT](licenses/aboudjem-humanizer-skill-MIT.txt) |
-| [ayghri/i-have-adhd](https://github.com/ayghri/i-have-adhd) | Copyright (c) 2026 Ayoub Ghriss | [MIT](licenses/ayghri-i-have-adhd-MIT.txt) |
+| [blader/humanizer](https://github.com/blader/humanizer/tree/9862685f575c65a8247f90369951df1b3416e3d6) | Copyright (c) 2025 Siqi Chen | [MIT](licenses/blader-humanizer-MIT.txt) |
+| [hardikpandya/stop-slop](https://github.com/hardikpandya/stop-slop/tree/8da1f030185bdfe8471220585162991eaeb970e9) | Copyright (c) 2025 Hardik Pandya | [MIT](licenses/stop-slop-MIT.txt) |
+| [Aboudjem/humanizer-skill](https://github.com/Aboudjem/humanizer-skill/tree/a58df065367550b6ce40ff3f648335018d8e0589) | Copyright (c) 2026 Adam Boudjemaa | [MIT](licenses/aboudjem-humanizer-skill-MIT.txt) |
+| [ayghri/i-have-adhd](https://github.com/ayghri/i-have-adhd/tree/839872f9d1cd634fed642b4589ce7226199cc15f) | Copyright (c) 2026 Ayoub Ghriss | [MIT](licenses/ayghri-i-have-adhd-MIT.txt) |
 
-Their MIT notices are reproduced unchanged. This package rewrites and combines
-editorial ideas; it does not reproduce the upstream skill files, pattern
-catalogues, examples, code or assets. The authors above have not endorsed it.
-The package's own MIT licence accompanies the distribution as `LICENSE`.
+Their MIT notices are preserved unchanged. The package's own [MIT licence](LICENSE)
+covers its original material. The authors above have not endorsed Hooman.
 
-The inspected Humanizer projects acknowledge Wikipedia's
-[Signs of AI writing](https://en.wikipedia.org/wiki/Wikipedia:Signs_of_AI_writing).
-Wikipedia text has its own licensing conditions, including CC BY-SA 4.0, under
-[Wikimedia's terms](https://foundation.wikimedia.org/wiki/Policy:Terms_of_Use#7._Licensing_of_Content).
-No Wikipedia passages, adapted examples or catalogue are included here.
-
-Aboudjem's references also cite the HC3 corpus. Its
-[dataset card](https://huggingface.co/datasets/Hello-SimpleAI/HC3/blob/main/README.md)
-declares CC BY-SA 4.0 and preserves stricter source-dataset terms where applicable.
-No dataset records, detector code or research-paper text are distributed here.
-Upstream Contributor Covenant text, website dependencies, images and fonts are
-also excluded. Their licences are not replaced by the repositories' MIT notices.
-
-The [source decision record](references/source-decisions.md) identifies the exact
-commits inspected and explains the changes. All examples and evaluation cases in
-this package were created for this project.
-
-The [published writing samples](references/style-sources.md) from OpenAI,
-Anthropic, Netflix TechBlog and Zach Holman are cited for editorial observations.
-No article passages, code, images or distinctive anecdotes are reproduced. Those
-articles retain their respective rights; this package's MIT licence does not
-relicense them or imply endorsement by their authors.
+No upstream skill files, examples, code, article passages, dataset records or visual
+assets are reproduced. All examples and evaluation fixtures were written for this
+project. This package does not relicense third-party material.

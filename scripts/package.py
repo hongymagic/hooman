@@ -78,7 +78,7 @@ def validate(tag: str | None) -> tuple[str, dict, dict, dict[str, bytes]]:
     require(claude_market["plugins"][0].get("version") == version, "Marketplace version must match VERSION")
 
     files = source_files()
-    for name in ("SKILL.md", "README.md", "references/examples.md", "references/source-decisions.md",
+    for name in ("SKILL.md", "README.md", "references/style-guide.md",
                  "evals/cases.md", "NOTICE.md"):
         require(bool(files.get(f"human-writing/{name}")), f"Missing or empty skill resource: {name}")
     require(any(name.startswith("human-writing/licenses/") for name in files), "Missing upstream licences")

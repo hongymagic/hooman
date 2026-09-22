@@ -14,18 +14,18 @@ Maintain the skill only in `human-writing/`. Source compatibility manifests poin
 
 The generated plugin uses fixed `skills/` discovery from [Agent Plugins 1.0.0](https://agent-plugins.org/schemas/1.0.0/plugin.schema.json), as required by [OpenAI's current packaging documentation](https://developers.openai.com/plugins/build/plugins). Its OpenAI interface metadata is in `extensions.com.openai`; the separate Codex compatibility manifest remains available to older hosts. Claude uses its own compatibility manifest. The archive builder rewrites only these manifest skill paths; canonical skill files retain their exact bytes and relative links.
 
-ZIP entries have sorted paths, fixed timestamps and permissions, and no compression. For this small text package, storing entries provides reproducible bytes without depending on a compressor version. Builds include the complete skill directory, including provenance, evaluation records and licence notices. Those references are not automatically loaded as writing instructions. No CI scripts or development dependencies ship in either runtime archive.
+ZIP entries have sorted paths, fixed timestamps and permissions, and no compression. For this small text package, storing entries provides reproducible bytes without depending on a compressor version. Builds include the complete skill directory, including the optional style guide, evaluation records and licence notices. Those resources are not automatically loaded as writing instructions. No CI scripts or development dependencies ship in either runtime archive.
 
 ## Cut a release
 
 1. Update the stable semantic version in `VERSION`, `.codex-plugin/plugin.json`, `.claude-plugin/plugin.json`, and the plugin entry in `.claude-plugin/marketplace.json`. Update installation examples in `README.md` to that version. Pre-release version strings are deliberately unsupported by this small release pipeline.
 2. Revisit the evaluation cases when changing editorial behaviour. Record the model, conditions, actual outputs and limitations in `human-writing/evals/`; do not infer writing quality from packaging checks.
 3. Run `python3 scripts/package.py --check --tag v<version>`. Where available, validate the Claude source with `claude plugin validate --strict .claude-plugin/plugin.json` and `claude plugin validate --strict .claude-plugin/marketplace.json`.
-4. Commit the finished change on `main` and let **Check package** pass. Create and push an annotated `v<version>` tag pointing at that commit. For version 0.2.0, the commands are:
+4. Commit the finished change on `main` and let **Check package** pass. Create and push an annotated `v<version>` tag pointing at that commit. For version 0.3.0, the commands are:
 
    ```sh
-   git tag -a v0.2.0 -m "Release Hooman 0.2.0"
-   git push origin v0.2.0
+   git tag -a v0.3.0 -m "Release Hooman 0.3.0"
+   git push origin v0.3.0
    ```
 
 5. The **Release** workflow checks the exact tag/version match, builds and validates the archives, then publishes a GitHub Release with both ZIPs and checksums. Open the resulting release and confirm all three assets are attached. It does not submit anything to an OpenAI or Anthropic directory.

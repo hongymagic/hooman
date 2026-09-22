@@ -1,32 +1,27 @@
 # human-writing
 
-A portable editorial skill for drafting, editing and reviewing prose. Its instructions
-live in [SKILL.md](SKILL.md); the host model supplies the writing capability. The skill
-has no runtime dependencies or external services.
+Use this skill to draft, edit or review prose. It follows your facts, audience and
+voice, and leaves effective writing alone.
 
-After installing it in a host that supports Agent Skills, ask naturally:
+After installing it, ask naturally:
 
 - “Use human-writing to draft an executive update from these facts: …”
-- “Use human-writing to tighten this email for a customer: …”
-- “Use human-writing to review this ADR. Explain suggested changes without rewriting it: …”
+- “Use human-writing to tighten this email, keeping my tone: …”
+- “Use human-writing to review this ADR without rewriting it: …”
 
-Include the audience, purpose, constraints and an optional voice sample when useful.
-Ordinary drafting and editing requests can also activate the skill through its description.
-The host controls discovery and explicit invocation syntax.
+Include the audience, purpose, constraints or a writing sample when useful. The host
+controls how skills are discovered and invoked. See the
+[installation instructions](https://github.com/hongymagic/hooman#install) for Codex,
+ChatGPT and Claude.
 
-For platform installation, downloadable bundles and release instructions, see the
-[hooman repository](https://github.com/hongymagic/hooman#readme).
+[SKILL.md](SKILL.md) contains the complete editorial policy. The optional
+[style guide](references/style-guide.md) illustrates phrasing, rhythm and voice.
+Neither requires scripts, network calls or external writing services.
 
-Optional [examples](references/examples.md) explain editorial choices, from plain
-verbs and natural cadence to useful contrasts and empty slogans;
-[source decisions](references/source-decisions.md) record the inspected upstream commits
-and synthesis. [Writing samples](references/style-sources.md) document the later
-review of OpenAI, Anthropic, Netflix and Zach Holman posts.
-[Evaluation cases](evals/cases.md) define observable outcomes without
-requiring exact rewrites. These resources are not loaded for ordinary writing tasks.
-The [latest evaluation record](evals/v0.2.0/results.md) compares the phrasing refinement
-with the previous skill and links earlier evaluations.
+The [evaluation cases](evals/cases.md) and
+[validation record](evals/v0.3.0/results.md) document checks and their limits.
+Models can still misread evidence or overedit; packaging checks do not measure
+writing quality. Evaluation records and installation guidance are not loaded for
+ordinary writing tasks.
 
-Read [NOTICE.md](NOTICE.md) and the bundled licences for attribution. The instructions
-can reduce avoidable editorial drift, but a model can still misunderstand evidence or
-miss a factual error; evaluation results document observed behaviour rather than a guarantee.
+See [NOTICE.md](NOTICE.md) for attribution and the preserved licences.
