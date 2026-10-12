@@ -1,7 +1,7 @@
 {
   "name": "hooman",
-  "version": "0.3.0",
-  "description": "Clear, natural writing that preserves meaning and fits the audience.",
+  "version": "1.0.0",
+  "description": "Check, edit and recheck prose for its reader, facts and author voice.",
   "author": {
     "name": "hongymagic",
     "url": "https://github.com/hongymagic"
@@ -9,6 +9,11 @@
   "homepage": "https://github.com/hongymagic/hooman",
   "repository": "https://github.com/hongymagic/hooman",
   "license": "MIT",
-  "keywords": ["writing", "editing", "human-writing"],
+  "keywords": [
+    "writing",
+    "editing",
+    "human-writing",
+    "prose-linting"
+  ],
   "skills": "./human-writing"
 }

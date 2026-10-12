@@ -1,85 +1,153 @@
 # Hooman
 
-Hooman provides one reusable skill, **human-writing**, for drafting, editing and reviewing prose. It works from the facts or writing you supply, preserving your meaning and adapting to your audience and voice.
+Hooman helps you turn a draft into writing you can use. It checks common editing
+patterns, rewrites for the reader, gets a separate model edit when available,
+then compares and checks the result.
 
-Use it for emails, executive updates, ADRs, documentation, PR descriptions, articles and product copy. It defaults to direct, professional language and Australian English when writing in English, and preserves the input language unless you ask for a translation. Factual accuracy takes priority over style. AI-detector evasion is not a goal.
+Use it for emails, READMEs, technical decisions, updates, articles and product
+copy. It preserves your facts and voice. English defaults to Australian spelling
+unless your brief or draft establishes another convention.
 
-The skill is Markdown, with no runtime dependencies, network requests, telemetry, hooks or external writing services. Your chosen host model processes the prose under that host's settings. The core instructions are complete on their own.
+The `human-writing` skill contains the workflow. A local checker gives line-level
+findings and a score out of five. A separate helper can send a draft to a different
+model family through an installed Codex or Claude CLI. The checker needs Python
+3.12 or newer and has no third-party dependencies or network calls. The model
+pass needs its own provider access. The instructions also support manual editing.
+
+## Try the checker
+
+From a checkout:
+
+```sh
+python3 human-writing/scripts/check.py --text "It is worth noting that the export runs."
+```
+
+That returns 4/5, identifies the empty announcement and exits 1. After editing:
+
+```sh
+python3 human-writing/scripts/check.py --text "The export runs."
+```
+
+That returns 5/5 and exits 0. A score reflects matched patterns. It does not verify
+facts, measure all aspects of writing quality or establish who wrote the text.
+
+Check a file or request a machine-readable report:
+
+```sh
+python3 human-writing/scripts/check.py README.md
+python3 human-writing/scripts/check.py README.md --json
+```
+
+Markdown extraction excludes common literal examples and code. HTML extraction
+reads static prose and omits scripts, styles and explicitly hidden subtrees.
+Context-dependent findings remain advisory; `--strict` includes them in the gate.
+See the [checker reference](human-writing/references/checker.md) for rule IDs,
+allowances, extraction boundaries and exit statuses. Rules cover English only;
+other languages need editorial review without this numeric score.
 
 ## Install
 
-Choose the instructions for your host below. Install either the skill or the plugin once per host to avoid duplicate entries.
+Choose the skill or plugin for each host to avoid duplicate entries.
+[Releases](https://github.com/hongymagic/hooman/releases) contain versioned ZIPs and
+checksums. To build this checkout's archives:
 
-Versioned archives and `SHA256SUMS` are available from [Releases](https://github.com/hongymagic/hooman/releases). The standalone skill ZIP contains `human-writing/`. The plugin ZIP contains the same skill under `skills/human-writing/`, with portable, Codex and Claude manifests.
+```sh
+python3 scripts/package.py
+```
+
+For version 1.0.0 this creates `dist/human-writing-1.0.0.zip`,
+`dist/hooman-1.0.0-plugin.zip` and `dist/SHA256SUMS`.
 
 ### Codex
 
-To install the plugin from the repository marketplace:
+Install through the repository marketplace:
 
 ```sh
-codex plugin marketplace add hongymagic/hooman --ref v0.3.0
+codex plugin marketplace add hongymagic/hooman
 codex plugin add hooman@hooman
 ```
 
-Start a new task, select Hooman from your installed plugins and ask it to use `human-writing`. This repository is not listed in OpenAI's public plugin directory. [OpenAI's plugin documentation](https://developers.openai.com/plugins/build/plugins) covers marketplace installation and supported package formats.
-
-For a standalone skill, extract `human-writing-0.3.0.zip` into `~/.agents/skills/` or your project's `.agents/skills/`. The resulting path must be `.../skills/human-writing/SKILL.md`. Invoke it as `$human-writing` or let Codex select it for a relevant writing request. See [Codex skill locations](https://learn.chatgpt.com/docs/build-skills#where-codex-loads-local-skills).
+For a standalone skill, extract the skill ZIP into `~/.agents/skills/` or your
+project's `.agents/skills/`. The resulting path is
+`.../skills/human-writing/SKILL.md`. Invoke `$human-writing`, or let the host
+select it for a writing request. See the
+[Codex skill documentation](https://learn.chatgpt.com/docs/build-skills).
 
 ### Claude Code
-
-Install the plugin from the repository marketplace:
 
 ```sh
 claude plugin marketplace add hongymagic/hooman
 claude plugin install hooman@hooman
 ```
 
-Invoke `/hooman:human-writing`, followed by your request. This marketplace follows the repository's default branch. For an exact release, check out its tag and load that checkout for a session:
+Invoke `/hooman:human-writing` with your draft and brief. To use a local checkout
+for one session:
 
 ```sh
-git clone --branch v0.3.0 --depth 1 https://github.com/hongymagic/hooman.git
-claude --plugin-dir ./hooman
+claude --plugin-dir .
 ```
 
-The manifest uses a custom skill path supported by [Claude Code plugins](https://code.claude.com/docs/en/plugins-reference). The repository also includes a [Claude marketplace](https://code.claude.com/docs/en/plugin-marketplaces).
+See the [Claude plugin documentation](https://code.claude.com/docs/en/plugins).
 
-### ChatGPT
+### ChatGPT and Claude
 
-Where Skills are available, open **Plugins → Skills → Create → Upload from your computer** and upload the standalone `human-writing-0.3.0.zip`. Install it, then ask, “Use human-writing to edit this draft.” Availability depends on your account and workspace; see [Skills in ChatGPT](https://help.openai.com/en/articles/20001066).
+Where custom skill uploads are available, upload the standalone skill ZIP and
+ask the host to use `human-writing`. Upload and execution support depend on the
+host and workspace. Follow the current instructions for
+[ChatGPT Skills](https://help.openai.com/en/articles/20001066) or
+[Claude Skills](https://support.claude.com/en/articles/12512180-use-skills-in-claude).
+The plugin ZIP is a separate plugin distribution, with portable, Codex and Claude
+manifests. Installing a skill does not publish it to a directory.
 
-The separate plugin ZIP follows the [current portable Agent Plugins format](https://developers.openai.com/plugins/build/plugins#package-and-distribute-plugins) for plugin import and submission workflows. Uploading to a private workspace and publishing to OpenAI's public directory are separate actions. This repository and its release pipeline do not publish a directory listing.
+## Use the skill
 
-### Claude web and desktop
+Ask naturally:
 
-Open **Customize → Skills → + → Create skill → Upload a skill** and upload `human-writing-0.3.0.zip`. Enable the skill and ask Claude to use it. Claude requires code execution to be enabled even though this skill contains no executable code. See [Claude's skill installation instructions](https://support.claude.com/en/articles/12512180-use-skills-in-claude).
+- “Use human-writing to de-slop this draft. Keep my tone.”
+- “Draft an executive update from these facts.”
+- “Review this ADR without rewriting it.”
 
-## Use
+Supply the audience, purpose, constraints and a genuine writing sample when they
+help. The skill returns finished prose by default and honours requests for copy
+only. It can also report findings without changing the document.
 
-Supply the facts or prose. Add the audience, purpose, constraints and a genuine writing sample when they would help. Use ordinary instructions to choose what the skill does:
+[SKILL.md](human-writing/SKILL.md) contains the workflow and factual safeguards.
+[Editing examples](human-writing/references/editing.md) show the decisions.
 
-- “Use human-writing to draft an executive update from these facts.”
-- “Use human-writing to tighten this email, keeping my tone.”
-- “Use human-writing to review this ADR and explain suggested changes. Don't rewrite it.”
+## Get a separate model edit
 
-The skill returns finished prose by default. When editing, it makes the smallest useful change; when reviewing, it explains suggested changes without rewriting. It flags unresolved factual conflicts.
-
-[SKILL.md](human-writing/SKILL.md) contains the full editorial policy. The optional [style guide](human-writing/references/style-guide.md) illustrates plain phrasing, sentence rhythm, author voice and the difference between empty rhetorical devices and useful ones.
-
-## Verify and maintain
-
-With Python 3.10 or newer, run:
+Use a CLI already installed and authenticated for a different model family.
+For a draft written by an OpenAI model:
 
 ```sh
-python3 scripts/package.py --check
-python3 scripts/package.py
+python3 human-writing/scripts/cleanse.py README.md --writer openai --output revised.md
 ```
 
-The packaging helper checks version consistency, package structure, core word count, archive integrity, source-byte preservation and reproducibility. It builds the two ZIP files and checksums in `dist/`. The helper is release tooling, is never included in the runtime archives and does not score writing quality.
+For a draft written by an Anthropic model, use `--writer anthropic`. The helper
+refuses same-family routing, validates a structured reply, checks the copy and
+saves a new candidate file. It never overwrites your source or an existing output.
+Compare that candidate with the source before accepting it. Provider data handling
+and usage charges apply to model calls.
 
-Review the [evaluation cases](human-writing/evals/cases.md) and [evaluation results](human-writing/evals/v0.3.0/results.md) for factual preservation, clarity, voice fit and unnecessary changes. Structural checks cannot prove editorial quality or guarantee that a model will follow every instruction. Native GUI import and all possible host/model combinations have not been tested.
+When another model is unavailable, print the brief for manual use:
 
-The [release instructions](docs/releases.md) cover tag publishing, version updates, recovery and packaging checks.
+```sh
+python3 human-writing/scripts/cleanse.py README.md --writer openai --prompt-only
+```
 
-## Licence
+See [the separate model guide](human-writing/references/second-pass.md) for routing,
+timeouts, failure handling and how to carry the editing brief.
 
-Original Hooman material is [MIT licensed](LICENSE). See [notices and attribution](human-writing/NOTICE.md) for upstream material and bundled licences.
+## Verify
+
+```sh
+python3 scripts/verify.py
+```
+
+That runs regression tests, checks the repository's prose and validates both
+reproducible archives. CI runs on Linux, macOS and Windows. Tests use controlled
+CLI responses and real local subprocesses; they make no model calls. The
+[validation notes](docs/validation.md) distinguish those checks from editorial
+judgement. [Release instructions](docs/releases.md) cover publishing and recovery.
+
+[MIT licensed](LICENSE).

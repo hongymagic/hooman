@@ -4,14 +4,14 @@
     "name": "hongymagic"
   },
   "metadata": {
-    "description": "The human-writing skill for clear, faithful prose."
+    "description": "Writing skills with local checks and an editing workflow."
   },
   "plugins": [
     {
       "name": "hooman",
       "source": "./",
-      "version": "0.3.0",
-      "description": "Draft, edit, or review prose while preserving meaning.",
+      "version": "1.0.0",
+      "description": "Check, edit and recheck prose while preserving facts and voice.",
       "category": "productivity"
     }
   ]

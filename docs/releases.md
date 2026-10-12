@@ -1,60 +1,100 @@
 # Maintaining and releasing Hooman
 
-## One source, two distributions
+## Canonical bundle
 
-Maintain the skill only in `human-writing/`. Source compatibility manifests point to `./human-writing`, allowing the repository to serve as a Codex and Claude marketplace without a second skill copy or symlinks.
+Maintain the installed skill in `human-writing/`. Both repository plugin manifests
+point there. The package builder includes the instructions, references, prompt,
+checker, model helper and project licence. Tests and release tooling stay outside
+the runtime bundle. Python caches are excluded.
 
-`scripts/package.py` generates:
+| Asset | Layout |
+| --- | --- |
+| `human-writing-<version>.zip` | `human-writing/SKILL.md` with its supporting files |
+| `hooman-<version>-plugin.zip` | `skills/human-writing/`, portable `plugin.json`, host manifests and licence |
+| `SHA256SUMS` | SHA-256 digests of both ZIPs |
 
-| Asset | Contents | Intended use |
-| --- | --- | --- |
-| `human-writing-<version>.zip` | `human-writing/SKILL.md` and its supporting resources/licences | Standalone skill installation or upload |
-| `hooman-<version>-plugin.zip` | Portable `plugin.json`, `skills/human-writing/`, `.codex-plugin/plugin.json`, `.claude-plugin/plugin.json`, `LICENSE` | Portable plugin import or a local plugin directory after extraction |
-| `SHA256SUMS` | SHA-256 hashes for both ZIPs | Verify downloaded release assets |
+The plugin archive uses [Agent Plugins 1.0.0](https://agent-plugins.org/schemas/1.0.0/plugin.schema.json)
+with OpenAI metadata in `extensions.com.openai`, plus Codex and Claude compatibility
+manifests. Only manifest discovery paths change during packaging. Canonical files
+retain their bytes and relative paths. Entries use sorted names, fixed timestamps
+and permissions, and stored compression for deterministic archives.
 
-The generated plugin uses fixed `skills/` discovery from [Agent Plugins 1.0.0](https://agent-plugins.org/schemas/1.0.0/plugin.schema.json), as required by [OpenAI's current packaging documentation](https://developers.openai.com/plugins/build/plugins). Its OpenAI interface metadata is in `extensions.com.openai`; the separate Codex compatibility manifest remains available to older hosts. Claude uses its own compatibility manifest. The archive builder rewrites only these manifest skill paths; canonical skill files retain their exact bytes and relative links.
+## Verify a change
 
-ZIP entries have sorted paths, fixed timestamps and permissions, and no compression. For this small text package, storing entries provides reproducible bytes without depending on a compressor version. Builds include the complete skill directory, including the optional style guide, evaluation records and licence notices. Those resources are not automatically loaded as writing instructions. No CI scripts or development dependencies ship in either runtime archive.
+```sh
+python3 scripts/verify.py
+python3 scripts/package.py --check --tag v1.0.0
+```
 
-## Cut a release
+The verification command runs regression tests, the prose gate and two independent
+builds for byte comparison. Packaging also validates versions, required resources,
+local links, Python 3.12 syntax and archive contents. Tests execute helpers from
+extracted standalone and plugin archives to catch missing runtime resources.
 
-1. Update the stable semantic version in `VERSION`, `.codex-plugin/plugin.json`, `.claude-plugin/plugin.json`, and the plugin entry in `.claude-plugin/marketplace.json`. Update installation examples in `README.md` to that version. Pre-release version strings are deliberately unsupported by this small release pipeline.
-2. Revisit the evaluation cases when changing editorial behaviour. Record the model, conditions, actual outputs and limitations in `human-writing/evals/`; do not infer writing quality from packaging checks.
-3. Run `python3 scripts/package.py --check --tag v<version>`. Where available, validate the Claude source with `claude plugin validate --strict .claude-plugin/plugin.json` and `claude plugin validate --strict .claude-plugin/marketplace.json`.
-4. Commit the finished change on `main` and let **Check package** pass. Create and push an annotated `v<version>` tag pointing at that commit. For version 0.3.0, the commands are:
+Revisit editorial cases when changing the instructions or rules. Use real outputs
+for any writing-quality claim. A pattern test or package check does not establish
+that a model follows the skill, preserves every fact or improves prose for readers.
+
+Validate Claude manifests with the installed CLI when available:
+
+```sh
+claude plugin validate --strict .claude-plugin/plugin.json
+claude plugin validate --strict .claude-plugin/marketplace.json
+```
+
+## Publish
+
+1. Update `VERSION`, both host manifests, the Claude marketplace entry and versioned
+   examples. Keep a stable semantic version; prerelease strings are unsupported.
+2. Run verification and inspect the final diff. Run `python3 scripts/package.py`
+   to build local assets for inspection.
+3. Commit the change and wait for CI. Create an annotated tag matching `VERSION`
+   and push it. For this version:
 
    ```sh
-   git tag -a v0.3.0 -m "Release Hooman 0.3.0"
-   git push origin v0.3.0
+   git tag -a v1.0.0 -m "Release Hooman 1.0.0"
+   git push origin v1.0.0
    ```
 
-5. The **Release** workflow checks the exact tag/version match, builds and validates the archives, then publishes a GitHub Release with both ZIPs and checksums. Open the resulting release and confirm all three assets are attached. It does not submit anything to an OpenAI or Anthropic directory.
+4. The release workflow repeats verification, checks the tag, builds the archives
+   and publishes both ZIPs with checksums. Confirm the three attached assets.
 
-The workflow uses the repository's automatic `GITHUB_TOKEN`; no personal access token or external service secret is required. Build jobs have `contents: read`; only the publish job receives `contents: write`. Pull requests do not run with publishing privileges, checkout does not retain credentials, and remote action dependencies are pinned to full commit SHAs following [GitHub's guidance](https://docs.github.com/en/actions/reference/security/secure-use). Dependabot proposes GitHub Actions updates monthly.
+The workflow uses `GITHUB_TOKEN`. Build jobs have read access; only publishing
+receives `contents: write`. Checkout does not retain credentials. Releases do not
+submit a public plugin listing or install the package into anyone's host.
 
-The action versions below were resolved from their upstream release tags on 22 September 2026:
+## Runtime and action pins
 
-| Action | Version | Inspected commit |
+CI uses Python 3.15.0, the current stable release verified against
+[Python's downloads](https://www.python.org/downloads/). It also checks the minimum
+supported series on Python 3.12.15 on Linux. Supporting 3.12 allows hosts with that
+maintained runtime to execute dependency-free helpers; no newer runtime feature
+is required. Full Python 3.15.0 checks run on Linux, macOS and Windows.
+
+Action tags were resolved to these commits on 12 October 2026:
+
+| Action | Version | Commit |
 | --- | --- | --- |
-| `actions/checkout` | `v7.0.1` | `3d3c42e5aac5ba805825da76410c181273ba90b1` |
-| `actions/setup-python` | `v7.0.0` | `5fda3b95a4ea91299a34e894583c3862153e4b97` |
-| `actions/upload-artifact` | `v7.0.1` | `043fb46d1a93c77aae656e7c1c64a875d1fc6a0a` |
-| `actions/download-artifact` | `v8.0.1` | `3e5f45b2cfb9172054b4087a40e8e0b5a5461e7c` |
+| checkout | 7.0.1 | `3d3c42e5aac5ba805825da76410c181273ba90b1` |
+| setup-python | 7.0.0 | `5fda3b95a4ea91299a34e894583c3862153e4b97` |
+| upload-artifact | 7.0.2 | `cf430e030ddbb5b0abf93d22962f4752f3646cd9` |
+| download-artifact | 8.0.2 | `9000827ccba6bdab643e8b6fd33ac0654aef8333` |
+
+Dependabot checks action updates monthly. Hooman does not install or pin the
+optional model CLIs; their host manages updates and authentication. The helper
+uses current documented structured-output options and a CLI default model unless
+`--model` is supplied. Consult the [Codex non-interactive reference](https://learn.chatgpt.com/docs/non-interactive-mode)
+and [Claude CLI reference](https://code.claude.com/docs/en/cli-reference) when
+updating those integrations.
 
 ## Recover a failed release
 
-If failure occurred before release creation, fix infrastructure issues and rerun the failed jobs for the same tag. Do not move a published tag. If the tagged content needs correction, create a new version.
+If the failure precedes publication, inspect the logs and rerun infrastructure
+failures for the same tag. Do not move a published tag. Correct tagged content in
+a new version. If an incomplete draft release remains, verify its target and
+assets before removing that draft and rerunning. The workflow does not overwrite
+an existing release.
 
-`gh release create` uploads supplied assets through a draft before publication and `--verify-tag` refuses an absent tag. See the [GitHub CLI contract](https://cli.github.com/manual/gh_release_create). If a failed run leaves a draft, inspect it with `gh release view v<version>` and inspect the workflow logs. Confirm its target commit and assets before retrying; remove only that incomplete draft when appropriate, then rerun the release job. The pipeline does not overwrite or delete an existing release on a rerun.
-
-To verify downloaded ZIPs on Linux, place them beside `SHA256SUMS` and run `sha256sum --check SHA256SUMS`. On macOS use `shasum -a 256 -c SHA256SUMS`. Checksums detect asset changes; they are not an independent signature of publisher identity.
-
-## Compatibility checks and limits
-
-On 22 September 2026, the packaging work used Python 3.14.7, Codex CLI 0.155.1 and Claude Code 2.1.278. `claude --plugin-dir . plugin details hooman` discovered exactly one `human-writing` skill and no agents, hooks, MCP servers or LSP servers. Both source Claude manifests passed native validation without warnings. The package helper verified deterministic builds, archive integrity and exact preservation of source files.
-
-An extracted generated plugin also passed the bundled Codex plugin-creator validator and Claude's strict plugin validator, and Claude discovered its single skill. Its portable `plugin.json` passed validation against the official Agent Plugins 1.0.0 JSON Schema fetched for this review. An intentionally mismatched `v9.9.9` tag was rejected before packaging. PyYAML and jsonschema were used only in temporary validation environments; neither is a project or runtime dependency.
-
-The bundled Codex plugin-creator validator requires the conventional `./skills/` layout even though the current Codex runtime supports custom legacy skill paths. Run that validator against an extracted generated plugin archive, where the conventional layout exists. Do not change the single canonical source layout merely to satisfy that older helper restriction.
-
-The publication workflow must be observed on GitHub to establish that a release ran successfully. Local builds do not establish that. ChatGPT and Claude web/desktop uploads require eligible accounts and workspace permissions and have not been verified through their GUIs. A compatible package is not a claim of public-directory approval. Host models can still make editorial mistakes; the behavioural evaluation report states its own coverage.
+Verify downloaded assets beside `SHA256SUMS` with `sha256sum --check SHA256SUMS`
+on Linux or `shasum -a 256 -c SHA256SUMS` on macOS. A checksum verifies bytes, not
+publisher identity.

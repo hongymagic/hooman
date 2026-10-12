@@ -1,27 +1,19 @@
 # human-writing
 
-Use this skill to draft, edit or review prose. It follows your facts, audience and
-voice, and leaves effective writing alone.
+Draft, edit or review prose for its reader. The skill checks a draft, rewrites it,
+uses a different model family for a second edit when available, then compares and
+checks the result.
 
-After installing it, ask naturally:
+Ask “Use human-writing to edit this draft”, “De-slop this copy”, or “Review this
+without rewriting it”. Supply the audience, purpose and a real voice sample when
+useful. Finished prose is the default output.
 
-- “Use human-writing to draft an executive update from these facts: …”
-- “Use human-writing to tighten this email, keeping my tone: …”
-- “Use human-writing to review this ADR without rewriting it: …”
+[SKILL.md](SKILL.md) contains the workflow.
+[Editing examples](references/editing.md) explain its decisions.
+[The checker](references/checker.md) runs locally with Python 3.12 or newer;
+[the separate model helper](references/second-pass.md) uses an installed,
+authenticated Codex or Claude CLI. The instructions also work without execution,
+but a manual review cannot supply a measured checker result.
 
-Include the audience, purpose, constraints or a writing sample when useful. The host
-controls how skills are discovered and invoked. See the
-[installation instructions](https://github.com/hongymagic/hooman#install) for Codex,
-ChatGPT and Claude.
-
-[SKILL.md](SKILL.md) contains the complete editorial policy. The optional
-[style guide](references/style-guide.md) illustrates phrasing, rhythm and voice.
-Neither requires scripts, network calls or external writing services.
-
-The [evaluation cases](evals/cases.md) and
-[validation record](evals/v0.3.0/results.md) document checks and their limits.
-Models can still misread evidence or overedit; packaging checks do not measure
-writing quality. Evaluation records and installation guidance are not loaded for
-ordinary writing tasks.
-
-See [NOTICE.md](NOTICE.md) for attribution and the preserved licences.
+See the [project installation guide](https://github.com/hongymagic/hooman#install).
+This bundle is [MIT licensed](LICENSE).
