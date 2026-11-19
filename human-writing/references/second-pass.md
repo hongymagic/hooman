@@ -1,17 +1,25 @@
 # A separate model edit
 
-Read this before using the helper. It sends the draft to an installed CLI's model
-provider using the account already authenticated there. That provider's data
-handling and usage charges apply. Use it when the task authorises processing the
-draft with that provider. No API key is stored or requested by Hooman.
+Read this before using the helper. The pass is optional. A second model family
+has different defaults, so it can catch habits the first one repeats, but no
+study has tested that claim directly, and model judges share at least one
+habit: they prefer the contrast frame too. Treat its output as a candidate and
+put it through the same comparison as your own edit. The deterministic checker
+stays in the loop for that reason.
 
-The helper accepts English drafts. It uses Python 3.12 or newer and a current
-Codex or Claude Code CLI supporting the flags below. It runs from a temporary
-directory, sends the draft through stdin and does not expose it in process
-arguments. It disables custom CLI configuration and session persistence. Codex
-uses its read-only sandbox with shell execution disabled; Claude has tools and
-MCP disabled. The CLIs still
-need their own authentication and network access.
+The helper sends the draft to an installed CLI's model provider using the
+account already authenticated there. That provider's data handling and usage
+charges apply. Use it when the task authorises processing the draft with that
+provider. No API key is stored or requested by Hooman.
+
+It accepts English drafts and needs Python 3.12 or newer with a current Codex or
+Claude Code CLI. It runs from a temporary directory, sends the draft through
+stdin and keeps it out of process arguments, and disables session persistence.
+Codex runs in its read-only sandbox with shell execution disabled and without
+its user configuration file. It still loads a personal `AGENTS.md` from the
+Codex home directory, so those instructions reach the reviewer. Claude runs
+with customisations, tools and MCP servers disabled. Both CLIs need their own
+authentication and network access.
 
 Commands below run from the skill directory. Use a draft path that exists and a
 new output path:
@@ -41,22 +49,22 @@ without a model call:
 python3 scripts/cleanse.py README.md --writer openai --prompt-only
 ```
 
-That command prints instructions and input, not a rewritten draft. Paste it into
-a different family's chat and request the specified JSON reply. Compare its
-`copy` with the source and check the saved document afterwards.
+That command prints instructions and input, and no rewritten draft. Paste it
+into a different family's chat and request the specified JSON reply. Save its
+`copy`, then run the checker and the comparison on it yourself.
 
 ## Result handling
 
-The helper validates a structured reply containing `copy` and `notes`, checks the
-returned copy and saves it atomically to a new file. It never replaces the source
-or an existing destination. Standard output stays empty during a model pass;
-change notes and checker findings go to stderr. Do not redirect stdout into a
-draft file. A saved draft is a candidate that still needs a fidelity comparison.
+The helper validates a structured reply containing `copy` and `notes`, checks
+the returned copy, compares it with the source and saves it atomically to a new
+file. It never replaces the source or an existing destination. Standard output
+stays empty during a model pass; change notes, checker findings and the
+comparison go to stderr. Do not redirect stdout into a draft file.
 
 | Exit | Meaning |
 | --- | --- |
-| 0 | A candidate was saved and has no blocking patterns, or a manual prompt was printed |
-| 1 | A candidate was saved with blocking findings requiring another edit |
+| 0 | A candidate was saved with no blocking pattern and no protected token changed, or a manual prompt was printed |
+| 1 | A candidate was saved, and it has blocking findings or changed a number, date, link, code span or quotation |
 | 2 | Invalid input, a failed CLI, an invalid reply or a save error; no candidate was saved |
 | 124 | The call exceeded its timeout or was interrupted; no candidate was saved |
 | 127 | No different-family CLI was installed; no candidate was saved |
@@ -66,7 +74,7 @@ of seconds. A timeout stops the process tree. The helper does not retry or fall
 back to another provider after a CLI failure. Resolve authentication, access or
 compatibility separately, or use the manual prompt and continue the local edit.
 
-Before using a candidate, compare facts, uncertainty, obligations, code, links,
-quotations and structure with the original. The helper's schema and pattern
-checks cannot establish semantic fidelity. Accept only changes that help the
-document and preserve the brief.
+Before using a candidate, account for every line of the comparison and read
+both versions as [fidelity.md](fidelity.md) describes. The schema, the pattern
+check and the token comparison cannot establish that the meaning survived.
+Accept only changes that help the document and preserve the brief.

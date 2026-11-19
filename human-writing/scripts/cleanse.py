@@ -14,9 +14,13 @@ import sys
 import tempfile
 from pathlib import Path
 
-from check import audit, infer_format, report
-
 HERE = Path(__file__).resolve().parent
+# Isolated interpreters (python -I) leave the script's directory off the path.
+sys.path.insert(0, str(HERE))
+from check import audit, infer_format, report, summary  # noqa: E402
+from compare import compare  # noqa: E402
+from compare import report as report_comparison  # noqa: E402
+
 FAMILIES = {"codex": "openai", "claude": "anthropic"}
 SCHEMA = {
     "type": "object",
@@ -285,19 +289,20 @@ def main(argv: list[str] | None = None) -> int:
         name, binary = select_reviewer(args.writer, args.reviewer)
         copy, notes = model_pass(name, binary, prompt, args.model, args.timeout)
         after = audit(copy, format)
+        comparison = compare(source, copy, format, format)
         save_new(args.output, copy)
         print(
-            f"Saved {args.output}; reviewer {name}; before {before['score']}/5, after {after['score']}/5.",
+            f"Saved {args.output}; reviewer {name}; "
+            f"before: {summary(before)}; after: {summary(after)}.",
             file=sys.stderr,
         )
         for note in notes:
             print(f"  {note}", file=sys.stderr)
         report({"path": str(args.output), **after}, stream=sys.stderr)
-        print(
-            "Compare the saved draft with the original for factual drift and protected content before using it.",
-            file=sys.stderr,
+        report_comparison(
+            {"revised": str(args.output), **comparison}, stream=sys.stderr
         )
-        return 0 if after["passed"] else 1
+        return 0 if after["passed"] and comparison["passed"] else 1
     except CleanseError as error:
         print(f"hooman: {error}", file=sys.stderr)
         return error.status

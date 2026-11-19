@@ -233,16 +233,33 @@ class CleanseCLITests(unittest.TestCase):
         self.assertEqual(self.output.read_bytes(), b"The export runs.\n")
         self.assertEqual(self.draft.read_bytes(), original)
         self.assertIn("Removed filler.", err)
-        self.assertIn("before 4/5, after 5/5", err)
+        self.assertIn(
+            "before: 1 blocking, 0 to review; after: 0 blocking, 0 to review", err
+        )
+        self.assertIn("against the original: no protected token changed", err)
 
     def test_blocking_candidate_is_saved_for_review_and_exits_one(self):
         with (
             patch("cleanse.select_reviewer", return_value=("claude", "/bin/claude")),
-            patch("cleanse.model_pass", return_value=("Delve into exports.", [])),
+            patch("cleanse.model_pass", return_value=("Let's dive into exports.", [])),
         ):
             status, _, _ = self.invoke("--output", str(self.output))
         self.assertEqual(status, 1)
-        self.assertEqual(self.output.read_text(), "Delve into exports.")
+        self.assertEqual(self.output.read_text(), "Let's dive into exports.")
+
+    def test_changed_fact_is_saved_for_review_and_exits_one(self):
+        self.draft.write_text(
+            "It is worth noting that 14 pipelines moved.\n", encoding="utf-8"
+        )
+        with (
+            patch("cleanse.select_reviewer", return_value=("claude", "/bin/claude")),
+            patch("cleanse.model_pass", return_value=("12 pipelines moved.\n", [])),
+        ):
+            status, out, err = self.invoke("--output", str(self.output))
+        self.assertEqual(status, 1)
+        self.assertEqual(out, "")
+        self.assertEqual(self.output.read_text(), "12 pipelines moved.\n")
+        self.assertIn("numbers   error: dropped: 14; added: 12", err)
 
     def test_no_candidate_on_model_failure_or_empty_extraction(self):
         for value in (cleanse.CleanseError("failed", 124), ("`Delve`", [])):
