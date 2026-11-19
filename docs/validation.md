@@ -304,9 +304,9 @@ failure rate moved in any corpus.
 
 The suite now holds 121 tests and passes on Python 3.12.3, 3.14.10 and 3.15.2.
 The single-token timing sweep, widened to 438 inputs with the constructs these
-fixes read, found nothing over a second. It ran before four last small changes
-to the comparison, and the sweep of token pairs was not repeated. The code
-changed after this review has had no independent review of its own.
+fixes read, found nothing over a second on the final scripts. The sweep of
+token pairs was not repeated after the fixes. The code changed after this
+review has had no independent review of its own.
 
 ## Manual integration check: 18 November 2026
 
