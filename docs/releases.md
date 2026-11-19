@@ -23,7 +23,7 @@ and permissions, and stored compression for deterministic archives.
 
 ```sh
 python3 scripts/verify.py
-python3 scripts/package.py --check --tag v1.0.0
+python3 scripts/package.py --check --tag v2.0.0
 ```
 
 The verification command runs regression tests, the prose gate and two independent
@@ -34,6 +34,25 @@ extracted standalone and plugin archives to catch missing runtime resources.
 Revisit editorial cases when changing the instructions or rules. Use real outputs
 for any writing-quality claim. A pattern test or package check does not establish
 that a model follows the skill, preserves every fact or improves prose for readers.
+
+When a rule, a word list or a threshold changes, measure it before release:
+
+```sh
+python3 scripts/calibrate.py fetch
+python3 scripts/calibrate.py measure --rules
+```
+
+`fetch` downloads the pinned human texts and the parallel corpus into
+`.calibration/`, which git ignores. `scripts/calibration-corpus.json` pins
+every human text and every cell of the parallel corpus by hash. Nothing reaches
+the cache until it matches its pin, and a damaged or partial cache is fetched
+again. `measure` reads exactly what the manifest names and stops if any of it
+is missing or changed. If the published corpus changes, `fetch` stops with a
+mismatch: pin the new cells and measure again on purpose. `measure` prints the
+share of documents that fail the gate and the rate of every rule. Add fresh
+model drafts with `--extra NAME=DIR`. Record the figures and the date in the
+[validation notes](validation.md). Word habits change with each model
+generation, so review the stock lists whenever the model corpus is refreshed.
 
 Validate Claude manifests with the installed CLI when available:
 
@@ -52,8 +71,8 @@ claude plugin validate --strict .claude-plugin/marketplace.json
    and push it. For this version:
 
    ```sh
-   git tag -a v1.0.0 -m "Release Hooman 1.0.0"
-   git push origin v1.0.0
+   git tag -a v2.0.0 -m "Release Hooman 2.0.0"
+   git push origin v2.0.0
    ```
 
 4. The release workflow repeats verification, checks the tag, builds the archives

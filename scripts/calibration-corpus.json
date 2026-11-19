@@ -1,0 +1,532 @@
+{
+  "human": [
+    {
+      "repo": "basecamp/handbook",
+      "commit": "5ffdc55c7145af9d42b84ff4a5948a2c87b4d7d6",
+      "path": "README.md",
+      "register": "handbook",
+      "words": 464,
+      "sha256": "e68fcf41497a770440d717ac052073d4f48fc3a522cdfccca19dff9b25b8642a"
+    },
+    {
+      "repo": "basecamp/handbook",
+      "commit": "5ffdc55c7145af9d42b84ff4a5948a2c87b4d7d6",
+      "path": "benefits-and-perks.md",
+      "register": "handbook",
+      "words": 2298,
+      "sha256": "f011ce2693b63f067dfe764955f69bd4a5de33c95541c5ccdcaced9ab22179ad"
+    },
+    {
+      "repo": "basecamp/handbook",
+      "commit": "5ffdc55c7145af9d42b84ff4a5948a2c87b4d7d6",
+      "path": "how-we-work.md",
+      "register": "handbook",
+      "words": 1906,
+      "sha256": "5cf01a30409d0a5ac0f6f4eb269bbe4164a0b9e9f6a67438ac72c3516aff9c3c"
+    },
+    {
+      "repo": "basecamp/handbook",
+      "commit": "5ffdc55c7145af9d42b84ff4a5948a2c87b4d7d6",
+      "path": "making-a-career.md",
+      "register": "handbook",
+      "words": 1056,
+      "sha256": "aa02b51b74824c19bcc9d77c02263328b08792f3fe126b81ac39e2bf2d8fa5d8"
+    },
+    {
+      "repo": "basecamp/handbook",
+      "commit": "5ffdc55c7145af9d42b84ff4a5948a2c87b4d7d6",
+      "path": "product-histories.md",
+      "register": "handbook",
+      "words": 1443,
+      "sha256": "e396a81cc5f34f85fe4b6b2c118efc594b07a1af9c718af400a8b1fe214a697f"
+    },
+    {
+      "repo": "basecamp/handbook",
+      "commit": "5ffdc55c7145af9d42b84ff4a5948a2c87b4d7d6",
+      "path": "titles-for-support.md",
+      "register": "handbook",
+      "words": 1058,
+      "sha256": "911f3d39b01a7ad66f069604c6d30a651e4c332610ce90473d8f05547f26af0d"
+    },
+    {
+      "repo": "basecamp/handbook",
+      "commit": "5ffdc55c7145af9d42b84ff4a5948a2c87b4d7d6",
+      "path": "what-we-stand-for.md",
+      "register": "handbook",
+      "words": 693,
+      "sha256": "7c2cc8cc97adf185756b561bfbeafc090e7f00bca17bd95e8621b0f73953164c"
+    },
+    {
+      "repo": "basecamp/handbook",
+      "commit": "5ffdc55c7145af9d42b84ff4a5948a2c87b4d7d6",
+      "path": "our-rituals.md",
+      "register": "handbook",
+      "words": 743,
+      "sha256": "fb7f3860353984835987a1db46425ca5af19681d503714d0eaaca6b0e291029d"
+    },
+    {
+      "repo": "basecamp/handbook",
+      "commit": "5ffdc55c7145af9d42b84ff4a5948a2c87b4d7d6",
+      "path": "international-travel-guide.md",
+      "register": "handbook",
+      "words": 1358,
+      "sha256": "a018aaab2520dea3948e9bb29f2e4612557131649c246e9d7f44f2a763bc2add"
+    },
+    {
+      "repo": "18F/content-guide",
+      "commit": "66441b70f91fee31a2fb82bf072f91510c4be0fc",
+      "path": "_pages/our-style/voice-and-tone.md",
+      "register": "guidance",
+      "words": 1371,
+      "sha256": "1a9ce42fbf7cfd2f32346a39ca36f986ed8651061100629fd3262cd2caa8c81b"
+    },
+    {
+      "repo": "18F/content-guide",
+      "commit": "66441b70f91fee31a2fb82bf072f91510c4be0fc",
+      "path": "_pages/our-style/inclusive-language.md",
+      "register": "guidance",
+      "words": 913,
+      "sha256": "314f97b74317ab8424acb0f2c9be34478fa156b90c1f8d4265faa4f2455c1740"
+    },
+    {
+      "repo": "18F/content-guide",
+      "commit": "66441b70f91fee31a2fb82bf072f91510c4be0fc",
+      "path": "_pages/our-style/technical-and-interface-writing.md",
+      "register": "guidance",
+      "words": 847,
+      "sha256": "9d9d28902a92fe94c2f8ff63409da04320af7c5ba621315e832727287a17cfa8"
+    },
+    {
+      "repo": "18F/content-guide",
+      "commit": "66441b70f91fee31a2fb82bf072f91510c4be0fc",
+      "path": "_pages/our-approach/plain-language.md",
+      "register": "guidance",
+      "words": 715,
+      "sha256": "2388895f77cd73e5fbb8b2965d779b2cad6d9f15e8ed42069e2e8b506be71079"
+    },
+    {
+      "repo": "18F/content-guide",
+      "commit": "66441b70f91fee31a2fb82bf072f91510c4be0fc",
+      "path": "_pages/our-approach/structure-the-content.md",
+      "register": "guidance",
+      "words": 894,
+      "sha256": "d1cef50d0136572bf0f62dae6be257b27a141e43e1e3d44595b414e402796173"
+    },
+    {
+      "repo": "18F/content-guide",
+      "commit": "66441b70f91fee31a2fb82bf072f91510c4be0fc",
+      "path": "_pages/our-approach/gather-feedback.md",
+      "register": "guidance",
+      "words": 952,
+      "sha256": "072b1b013ea348c051798230547ce8d25b43b6c1658586333f20bb07bf82e6b1"
+    },
+    {
+      "repo": "18F/content-guide",
+      "commit": "66441b70f91fee31a2fb82bf072f91510c4be0fc",
+      "path": "_pages/our-approach/keep-refining.md",
+      "register": "guidance",
+      "words": 753,
+      "sha256": "e197fda876d542ec36a32c64c025660c50a6d1051d1b4a07aaf9faee37ee58fb"
+    },
+    {
+      "repo": "heroku/12factor",
+      "commit": "72ff17444800e08e64bed9e749f5e5abdfb27bea",
+      "path": "content/en/admin-processes.md",
+      "register": "manifesto",
+      "words": 304,
+      "sha256": "fc496eaf191463a22fa4a04e4eca2bab35889f966688e024959ea320c310a7cd"
+    },
+    {
+      "repo": "heroku/12factor",
+      "commit": "72ff17444800e08e64bed9e749f5e5abdfb27bea",
+      "path": "content/en/background.md",
+      "register": "manifesto",
+      "words": 166,
+      "sha256": "be4ea69343efe10323b04edaaca8158be20ef04a5c82484a7d078e045569b527"
+    },
+    {
+      "repo": "heroku/12factor",
+      "commit": "72ff17444800e08e64bed9e749f5e5abdfb27bea",
+      "path": "content/en/backing-services.md",
+      "register": "manifesto",
+      "words": 347,
+      "sha256": "092e74d60e59001d0f70e39024c6bbac67188907f677431c1081b80f20b37695"
+    },
+    {
+      "repo": "heroku/12factor",
+      "commit": "72ff17444800e08e64bed9e749f5e5abdfb27bea",
+      "path": "content/en/build-release-run.md",
+      "register": "manifesto",
+      "words": 390,
+      "sha256": "f5eababf567dfe7a3ea7740d32372aeffb22fb660c4e296c8c4701b179bb517b"
+    },
+    {
+      "repo": "heroku/12factor",
+      "commit": "72ff17444800e08e64bed9e749f5e5abdfb27bea",
+      "path": "content/en/codebase.md",
+      "register": "manifesto",
+      "words": 277,
+      "sha256": "aafead6b0d15bd56a80521bd783094d5bf2d7381cf4dec2c15716ea8f2798e9a"
+    },
+    {
+      "repo": "heroku/12factor",
+      "commit": "72ff17444800e08e64bed9e749f5e5abdfb27bea",
+      "path": "content/en/concurrency.md",
+      "register": "manifesto",
+      "words": 338,
+      "sha256": "d4a22e2db87f45c04f78bcec5fe3dd69075359e9a76d724039ce110b0acfc996"
+    },
+    {
+      "repo": "heroku/12factor",
+      "commit": "72ff17444800e08e64bed9e749f5e5abdfb27bea",
+      "path": "content/en/config.md",
+      "register": "manifesto",
+      "words": 457,
+      "sha256": "eb1dd6799ee8a82ca0074727432138234f40841952392406aa05c76fb35fcd27"
+    },
+    {
+      "repo": "heroku/12factor",
+      "commit": "72ff17444800e08e64bed9e749f5e5abdfb27bea",
+      "path": "content/en/dependencies.md",
+      "register": "manifesto",
+      "words": 356,
+      "sha256": "636df45c364d8abc3fa2418be2e913dda1c97eca62c199048827bac2d91a8c87"
+    },
+    {
+      "repo": "heroku/12factor",
+      "commit": "72ff17444800e08e64bed9e749f5e5abdfb27bea",
+      "path": "content/en/dev-prod-parity.md",
+      "register": "manifesto",
+      "words": 573,
+      "sha256": "0964d7249df65f78f7a50fa066f80f99ca1125c3e64a25d07582905292a20e6d"
+    },
+    {
+      "repo": "heroku/12factor",
+      "commit": "72ff17444800e08e64bed9e749f5e5abdfb27bea",
+      "path": "content/en/disposability.md",
+      "register": "manifesto",
+      "words": 358,
+      "sha256": "8ee1f8a0acb60b75f1d2c761ba14234fd578d66c5c64a59347d48680bc09ee53"
+    },
+    {
+      "repo": "heroku/12factor",
+      "commit": "72ff17444800e08e64bed9e749f5e5abdfb27bea",
+      "path": "content/en/logs.md",
+      "register": "manifesto",
+      "words": 327,
+      "sha256": "7dcb48b93385aca9fb8a8087ba592f3c588bb3937ffee7ac1514ecb377932146"
+    },
+    {
+      "repo": "heroku/12factor",
+      "commit": "72ff17444800e08e64bed9e749f5e5abdfb27bea",
+      "path": "content/en/port-binding.md",
+      "register": "manifesto",
+      "words": 262,
+      "sha256": "21aba4d1b47a5cf15dfdb90ec6ef8473193dbbd7d84a563d5998e70cf90ff7ed"
+    },
+    {
+      "repo": "heroku/12factor",
+      "commit": "72ff17444800e08e64bed9e749f5e5abdfb27bea",
+      "path": "content/en/processes.md",
+      "register": "manifesto",
+      "words": 340,
+      "sha256": "ddc2e37e7587879cc4faa82b91fa9b71150228ba79a21670370652e48ca35dfd"
+    },
+    {
+      "repo": "rust-lang/blog.rust-lang.org",
+      "commit": "6045a5405d575a7b49ca235a6f62c95539260407",
+      "path": "posts/2014-09-15-Rust-1.0.md",
+      "register": "blog",
+      "words": 1458,
+      "sha256": "3cd74bb490fd0e930d2212ec8af6e4348c59e124f603bc70465072cbf76c9dc6"
+    },
+    {
+      "repo": "rust-lang/blog.rust-lang.org",
+      "commit": "6045a5405d575a7b49ca235a6f62c95539260407",
+      "path": "posts/2015-04-24-Rust-Once-Run-Everywhere.md",
+      "register": "blog",
+      "words": 2017,
+      "sha256": "e93288ab4b6f5b7445f9eb80cbbc75cf9767f01951f88780ac431cb0c709a4f0"
+    },
+    {
+      "repo": "rust-lang/blog.rust-lang.org",
+      "commit": "6045a5405d575a7b49ca235a6f62c95539260407",
+      "path": "posts/2016-04-19-MIR.md",
+      "register": "blog",
+      "words": 4175,
+      "sha256": "da09483c0a977a67ef81d28e44d5feca97daaa75f25b6829666611e422e81ac1"
+    },
+    {
+      "repo": "rust-lang/blog.rust-lang.org",
+      "commit": "6045a5405d575a7b49ca235a6f62c95539260407",
+      "path": "posts/2016-05-26-Rust-1.9.md",
+      "register": "blog",
+      "words": 1469,
+      "sha256": "af3aaa7ce4da2e785762951d793b8c44a4ebc9cfadb559ae63f8001a6ec2b035"
+    },
+    {
+      "repo": "rust-lang/blog.rust-lang.org",
+      "commit": "6045a5405d575a7b49ca235a6f62c95539260407",
+      "path": "posts/2016-09-29-Rust-1.12.md",
+      "register": "blog",
+      "words": 1714,
+      "sha256": "e237cd2e9af78e0469a669d057e928ec60f8cbc261f6460a0a26ce5fa1f7b666"
+    },
+    {
+      "repo": "rust-lang/blog.rust-lang.org",
+      "commit": "6045a5405d575a7b49ca235a6f62c95539260407",
+      "path": "posts/2017-03-02-lang-ergonomics.md",
+      "register": "blog",
+      "words": 3354,
+      "sha256": "97d5b2a8bfe90ab73349aebe5b948912cd03dd236712979b8f0b86384766d660"
+    },
+    {
+      "repo": "rust-lang/blog.rust-lang.org",
+      "commit": "6045a5405d575a7b49ca235a6f62c95539260407",
+      "path": "posts/2017-05-15-rust-at-two-years.md",
+      "register": "blog",
+      "words": 2751,
+      "sha256": "8e1302595647eeca605cbfd021aad58f10a8f7d149a4e0fa310b2527930b30fb"
+    },
+    {
+      "repo": "rust-lang/blog.rust-lang.org",
+      "commit": "6045a5405d575a7b49ca235a6f62c95539260407",
+      "path": "posts/2017-09-05-Rust-2017-Survey-Results.md",
+      "register": "blog",
+      "words": 2318,
+      "sha256": "655d4a7e6246d272e839914eb4651ed8424d074de05fa3966987f9014c700654"
+    },
+    {
+      "repo": "rust-lang/blog.rust-lang.org",
+      "commit": "6045a5405d575a7b49ca235a6f62c95539260407",
+      "path": "posts/2018-03-01-Rust-1.24.1.md",
+      "register": "blog",
+      "words": 1859,
+      "sha256": "3049eaa5059e0958235bc4147e102da4cf92b93578f463b11f79cd2d4b873fe7"
+    },
+    {
+      "repo": "rust-lang/blog.rust-lang.org",
+      "commit": "6045a5405d575a7b49ca235a6f62c95539260407",
+      "path": "posts/2018-06-21-Rust-1.27.md",
+      "register": "blog",
+      "words": 1666,
+      "sha256": "b7ab9a6586cfe5ac89a117406d46f866c7ac3e0bc64a6401c34607a07bbf5821"
+    },
+    {
+      "repo": "rust-lang/blog.rust-lang.org",
+      "commit": "6045a5405d575a7b49ca235a6f62c95539260407",
+      "path": "posts/2018-12-17-Rust-2018-dev-tools.md",
+      "register": "blog",
+      "words": 1507,
+      "sha256": "202b835ad7dc14634bc6167a4ef706abfd1f980b73be779e0ddf8b5eef01e143"
+    },
+    {
+      "repo": "rust-lang/blog.rust-lang.org",
+      "commit": "6045a5405d575a7b49ca235a6f62c95539260407",
+      "path": "posts/2019-07-04-Rust-1.36.0.md",
+      "register": "blog",
+      "words": 1189,
+      "sha256": "9eba3eeb3989ca0931615d5a62e723b306c995aed19ad6a83d920dbdb22b1d3c"
+    },
+    {
+      "repo": "rust-lang/blog.rust-lang.org",
+      "commit": "6045a5405d575a7b49ca235a6f62c95539260407",
+      "path": "posts/2020-04-17-Rust-survey-2019.md",
+      "register": "blog",
+      "words": 2189,
+      "sha256": "81a7e3588ce88aa284d3ff0275a5a054b459dddd9f9ad3bb9a02d1c5fd2e210f"
+    },
+    {
+      "repo": "rust-lang/blog.rust-lang.org",
+      "commit": "6045a5405d575a7b49ca235a6f62c95539260407",
+      "path": "posts/2020-12-16-rust-survey-2020.md",
+      "register": "blog",
+      "words": 1694,
+      "sha256": "7773c1937774b5735ab470672d7dbafa81300a7c1a012e9557f1957a539be836"
+    },
+    {
+      "repo": "rust-lang/blog.rust-lang.org",
+      "commit": "6045a5405d575a7b49ca235a6f62c95539260407",
+      "path": "posts/2021-05-11-edition-2021.md",
+      "register": "blog",
+      "words": 2463,
+      "sha256": "77adbf3b80f8f34e106801d23604fb98c4451278b35c7dbfddf3f0614d19d881"
+    },
+    {
+      "repo": "rust-lang/blog.rust-lang.org",
+      "commit": "6045a5405d575a7b49ca235a6f62c95539260407",
+      "path": "posts/2022-02-24-Rust-1.59.0.md",
+      "register": "blog",
+      "words": 1213,
+      "sha256": "46e7fd88684c9b4c693d1a02a21a0c50ae770acef58e12f3c59649fc9bdccc7f"
+    },
+    {
+      "repo": "rust-lang/blog.rust-lang.org",
+      "commit": "6045a5405d575a7b49ca235a6f62c95539260407",
+      "path": "posts/2022-09-22-Rust-1.64.0.md",
+      "register": "blog",
+      "words": 1494,
+      "sha256": "ac0f6309ddf4cfb9ded1e0e406202a44dfba05046778942bb56589199f392bfd"
+    },
+    {
+      "repo": "python/peps",
+      "commit": "780ba199a2e72f2da090014f2c7b0c5d163098e7",
+      "path": "pep-0008.txt",
+      "register": "standard",
+      "words": 6888,
+      "sha256": "097b9a55f20af2a02139bfa4af42b9d6402fd9ba84cf9b38317f9bb9c820fd55"
+    },
+    {
+      "repo": "python/peps",
+      "commit": "780ba199a2e72f2da090014f2c7b0c5d163098e7",
+      "path": "pep-0257.txt",
+      "register": "standard",
+      "words": 1533,
+      "sha256": "1ce254ff6088192f9b2e124ce39293a31450a4cf1923a08736363ade6ba539bb"
+    },
+    {
+      "repo": "python/peps",
+      "commit": "780ba199a2e72f2da090014f2c7b0c5d163098e7",
+      "path": "pep-0484.txt",
+      "register": "standard",
+      "words": 12983,
+      "sha256": "2d9ecc66fba6fc87126f50dbf7a7a8ee47fd5fc23e39dd1db09c28cdbcc64826"
+    },
+    {
+      "repo": "python/peps",
+      "commit": "780ba199a2e72f2da090014f2c7b0c5d163098e7",
+      "path": "pep-0572.rst",
+      "register": "standard",
+      "words": 6785,
+      "sha256": "735932d25c5e321d26af1d7baca8c8332bb2a9b8867b1b6fb581351362a9ccf5"
+    },
+    {
+      "repo": "python/peps",
+      "commit": "780ba199a2e72f2da090014f2c7b0c5d163098e7",
+      "path": "pep-0001.txt",
+      "register": "standard",
+      "words": 6100,
+      "sha256": "7243016e78a6cfdd38a5a5ba7abe917fbae763a085230f452462fedc9319c919"
+    },
+    {
+      "repo": "python/peps",
+      "commit": "780ba199a2e72f2da090014f2c7b0c5d163098e7",
+      "path": "pep-0020.txt",
+      "register": "standard",
+      "words": 228,
+      "sha256": "6088334136cb229bb5298aca5d5b5f2b3470b8f61fafafe4e19e16212a7b8f5c"
+    },
+    {
+      "repo": "django/django",
+      "commit": "2bc47d7fe95ec9fc62bc5c0d2408944e5269d9d0",
+      "path": "docs/intro/overview.txt",
+      "register": "docs",
+      "words": 1684,
+      "sha256": "e55661b9f0aa1103726f093461707e3e19c57a8c990b178184506961f5156ca1"
+    },
+    {
+      "repo": "django/django",
+      "commit": "2bc47d7fe95ec9fc62bc5c0d2408944e5269d9d0",
+      "path": "docs/intro/tutorial01.txt",
+      "register": "docs",
+      "words": 1873,
+      "sha256": "f1ff32919a16be0f51010241a41a11913c18e17da64d289f403e24e2beb45558"
+    },
+    {
+      "repo": "django/django",
+      "commit": "2bc47d7fe95ec9fc62bc5c0d2408944e5269d9d0",
+      "path": "docs/misc/design-philosophies.txt",
+      "register": "docs",
+      "words": 1446,
+      "sha256": "3eb7155eb5c96f64b6b6b8414cd39fe07191642b4e225180cdf43c7ebd778bba"
+    },
+    {
+      "repo": "django/django",
+      "commit": "2bc47d7fe95ec9fc62bc5c0d2408944e5269d9d0",
+      "path": "docs/faq/general.txt",
+      "register": "docs",
+      "words": 1323,
+      "sha256": "0fe556f3a6cb4a2cc091a45ce91b4e0541db1299bcc6c190aad61a6179b86bee"
+    },
+    {
+      "repo": "django/django",
+      "commit": "2bc47d7fe95ec9fc62bc5c0d2408944e5269d9d0",
+      "path": "docs/topics/db/queries.txt",
+      "register": "docs",
+      "words": 8540,
+      "sha256": "142ea45e2e4056707fb4787173ca2e18e3bc301a0741c847bcc6630373e94616"
+    },
+    {
+      "repo": "django/django",
+      "commit": "2bc47d7fe95ec9fc62bc5c0d2408944e5269d9d0",
+      "path": "docs/topics/http/views.txt",
+      "register": "docs",
+      "words": 1019,
+      "sha256": "56c335cb63b9a983157a6b490e0dd9ebe6ed0886d6341dd6b86de0bc3c28324e"
+    },
+    {
+      "repo": "pallets/flask",
+      "commit": "2a54cfa5cecf4dd9f17525bf3ebae4d33a155776",
+      "path": "README.rst",
+      "register": "docs",
+      "words": 256,
+      "sha256": "dfc60b903c5e01d7b3078fc938c362769dc9bfaf1263a817d55690fd5c3e3b03"
+    },
+    {
+      "repo": "pallets/flask",
+      "commit": "2a54cfa5cecf4dd9f17525bf3ebae4d33a155776",
+      "path": "docs/quickstart.rst",
+      "register": "docs",
+      "words": 4377,
+      "sha256": "e6869d55ab5ec17f0806bc593361c677be9ddfda835872293c4c3acead44371c"
+    },
+    {
+      "repo": "pallets/flask",
+      "commit": "2a54cfa5cecf4dd9f17525bf3ebae4d33a155776",
+      "path": "docs/design.rst",
+      "register": "docs",
+      "words": 1774,
+      "sha256": "50623cdef4a04bcce46713ed55b5229820b769ecce70ffa5304cea74fa087d74"
+    },
+    {
+      "repo": "pallets/flask",
+      "commit": "2a54cfa5cecf4dd9f17525bf3ebae4d33a155776",
+      "path": "docs/errorhandling.rst",
+      "register": "docs",
+      "words": 2364,
+      "sha256": "96d877866a6b72dbe42ef744763318cdff0176cf68019f23f91ec0c08b6f7ce8"
+    },
+    {
+      "repo": "kubernetes/website",
+      "commit": "26a9496c23d59c5a29a19959ba0c35b5775033bc",
+      "path": "content/en/docs/concepts/workloads/pods/_index.md",
+      "register": "docs",
+      "words": 2480,
+      "sha256": "b55414c1e8e816e21d6892a696a69a7d8d89d94f96643e2f025e216b6d10afd0"
+    },
+    {
+      "repo": "kubernetes/website",
+      "commit": "26a9496c23d59c5a29a19959ba0c35b5775033bc",
+      "path": "content/en/docs/concepts/services-networking/service.md",
+      "register": "docs",
+      "words": 9017,
+      "sha256": "153703398525cb24cf679c6aa1956ba91ff323522d80c1fe71cf1ce82092e89a"
+    },
+    {
+      "repo": "kubernetes/website",
+      "commit": "26a9496c23d59c5a29a19959ba0c35b5775033bc",
+      "path": "content/en/docs/concepts/architecture/nodes.md",
+      "register": "docs",
+      "words": 4247,
+      "sha256": "3c5576ebd986a83bc95e2638f914b8bd7981616cab5fc89ecc34cbf7b34fa9b4"
+    }
+  ],
+  "parallel": {
+    "gpt4o-acad": "5cb3b41b44c832ccb16c9e6d0290a6d9ebe0e993ca311620fdd94ec0cd180dca",
+    "gpt4o-blog": "646458af7817afc2e386d369d19dfd6c91e36af259db18f1c0a798cff55bf5ac",
+    "gpt4o-news": "15a35683e941ced09df183659a76d36decba14e75653d4e89720365c87bcb669",
+    "human-acad": "752aaba979bd9e214f0c4029234f1e15641a9ccd1304641ce87e2e13e811506e",
+    "human-blog": "6d830c5a2246e8af831bc51cfb0430c749f2b22679d3d7392e3f19dcc54a2b2d",
+    "human-news": "d82a8d64db17d59a4cdceb31c4d1d6ffe17328f3c8014f1d471aa99f63d660a5"
+  }
+}
