@@ -1,7 +1,7 @@
 {
   "name": "hooman",
-  "version": "1.0.0",
-  "description": "Check, edit and recheck prose for its reader, facts and author voice.",
+  "version": "2.0.0",
+  "description": "Check, edit and compare prose so it serves its reader and keeps its facts.",
   "author": {
     "name": "hongymagic",
     "url": "https://github.com/hongymagic"

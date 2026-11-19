@@ -1,7 +1,7 @@
 {
   "name": "hooman",
-  "version": "1.0.0",
-  "description": "Check, edit and recheck prose for its reader, facts and author voice.",
+  "version": "2.0.0",
+  "description": "Check, edit and compare prose so it serves its reader and keeps its facts.",
   "author": {
     "name": "hongymagic",
     "url": "https://github.com/hongymagic"
@@ -18,8 +18,8 @@
   "skills": "./human-writing",
   "interface": {
     "displayName": "Hooman",
-    "shortDescription": "Check, edit and recheck your writing",
-    "longDescription": "Draft, edit or review prose. Includes a local English checker and a separate-model editing helper.",
+    "shortDescription": "Check, edit and compare your writing",
+    "longDescription": "Draft, edit or review prose. Includes a local English pattern checker, a before-and-after fidelity comparison and an optional separate-model editing helper.",
     "developerName": "hongymagic",
     "category": "Productivity",
     "capabilities": [

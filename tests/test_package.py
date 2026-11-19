@@ -58,6 +58,22 @@ class PackageTests(unittest.TestCase):
                     )
                     self.assertEqual(check.returncode, 0, check.stderr)
                     self.assertTrue(json.loads(check.stdout)["passed"])
+                    compared = subprocess.run(
+                        [
+                            sys.executable,
+                            str(skill / "scripts/compare.py"),
+                            str(skill / "README.md"),
+                            str(skill / "README.md"),
+                            "--json",
+                        ],
+                        cwd=temporary,
+                        capture_output=True,
+                        text=True,
+                        encoding="utf-8",
+                        check=False,
+                    )
+                    self.assertEqual(compared.returncode, 0, compared.stderr)
+                    self.assertTrue(json.loads(compared.stdout)["passed"])
                     prompt = subprocess.run(
                         [
                             sys.executable,

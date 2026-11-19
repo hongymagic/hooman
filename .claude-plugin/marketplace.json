@@ -10,8 +10,8 @@
     {
       "name": "hooman",
       "source": "./",
-      "version": "1.0.0",
-      "description": "Check, edit and recheck prose while preserving facts and voice.",
+      "version": "2.0.0",
+      "description": "Check, edit and compare prose while preserving facts and voice.",
       "category": "productivity"
     }
   ]

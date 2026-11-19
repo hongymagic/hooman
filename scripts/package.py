@@ -130,10 +130,13 @@ def validate(tag: str | None) -> tuple[str, dict, dict, dict[str, bytes]]:
     for name in (
         "SKILL.md",
         "README.md",
-        "references/editing.md",
+        "references/patterns.md",
+        "references/registers.md",
+        "references/fidelity.md",
         "references/checker.md",
         "references/second-pass.md",
         "scripts/check.py",
+        "scripts/compare.py",
         "scripts/cleanse.py",
         "prompts/cleanse.txt",
     ):
