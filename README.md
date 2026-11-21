@@ -33,8 +33,8 @@ and checksums. To build the archives from a checkout:
 python3 scripts/package.py
 ```
 
-For version 2.0.0 this creates `dist/human-writing-2.0.0.zip`,
-`dist/hooman-2.0.0-plugin.zip` and `dist/SHA256SUMS`.
+For version 3.0.0 this creates `dist/human-writing-3.0.0.zip`,
+`dist/hooman-3.0.0-plugin.zip` and `dist/SHA256SUMS`.
 
 ### Codex
 

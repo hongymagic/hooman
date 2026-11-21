@@ -1,7 +1,7 @@
 {
   "name": "hooman",
-  "version": "2.0.0",
-  "description": "Check, edit and compare prose so it serves its reader and keeps its facts.",
+  "version": "3.0.0",
+  "description": "An agent skill for writing, editing and reviewing English prose in a plain style, with a checker and a fidelity comparison.",
   "author": {
     "name": "hongymagic",
     "url": "https://github.com/hongymagic"

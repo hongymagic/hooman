@@ -4,14 +4,14 @@
     "name": "hongymagic"
   },
   "metadata": {
-    "description": "Writing skills with local checks and an editing workflow."
+    "description": "A plain-style writing skill with a local checker and a fidelity comparison."
   },
   "plugins": [
     {
       "name": "hooman",
       "source": "./",
-      "version": "2.0.0",
-      "description": "Check, edit and compare prose while preserving facts and voice.",
+      "version": "3.0.0",
+      "description": "Writes, edits and reviews English prose in a plain style and checks that an edit kept its facts.",
       "category": "productivity"
     }
   ]

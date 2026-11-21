@@ -2,7 +2,7 @@
 
 This page records how the skill and its scripts were tested and measured.
 Version 2.0.0 replaced the pattern checker and added the fidelity comparison.
-The change of 21 November 2026 rewrote the instructions as a plain-style
+Version 3.0.0, of 21 November 2026, rewrote the instructions as a plain-style
 standard and added the heading, pitch and particulars rules; it is described
 under [Plain style](#plain-style-21-november-2026). The test suite lives in
 `tests/` and runs without a network or a model account:
@@ -222,7 +222,7 @@ guides. People write it too, so the rule is advisory. The only match of
 
 ### Change in gate failures
 
-| Corpus | 2.0.0 | After |
+| Corpus | 2.0.0 | 3.0.0 |
 | --- | --- | --- |
 | Human, technical and business | 16.9% | 16.9% |
 | Human, older | 7.9% | 7.9% |
@@ -236,13 +236,13 @@ The three older documents that fail do so on `staging.announcement` or
 ### Old and new instructions
 
 Claude Sonnet and Claude Haiku subagents each wrote six documents twice, once
-with the 2.0.0 skill and once with the changed one: a README, a launch post, a
+with the 2.0.0 skill and once with the 3.0.0 skill: a README, a launch post, a
 status update, landing page copy and a how-to from supplied facts, and an edit
 of the first 95 lines of the 2.0.0 README. Each agent was told only where its
-skill was. The 24 outputs were scored with the changed checker and with
+skill was. The 24 outputs were scored with the 3.0.0 checker and with
 `compare.py`.
 
-| Measure | 2.0.0 skill | Changed skill |
+| Measure | 2.0.0 skill | 3.0.0 skill |
 | --- | --- | --- |
 | Pitched headings | 7 of 38 | 0 of 40 |
 | Benefit, call and praise findings | 3 | 0 |
@@ -253,7 +253,7 @@ skill was. The 24 outputs were scored with the changed checker and with
 With the 2.0.0 skill both models returned the README edit unchanged, because
 the 2.0.0 checker reported nothing in it. Their landing pages used the headings
 `What you get`, `Works where your team works` and `Bring your passwords with
-you`. With the changed skill both models used `Features`, `Platforms`,
+you`. With the 3.0.0 skill both models used `Features`, `Platforms`,
 `Security` and `Pricing`, and both retitled `Try the checker` as `Checker`. One
 of the two left the heading `Compare an edit with its source` in place. The
 edit instruction now says to retitle every heading that is not a label; that
@@ -263,7 +263,7 @@ All four agents wrote a launch post shorter than the 400 words requested and
 said why: the facts supplied did not fill it.
 
 This comparison has 12 documents to an arm, one run each, and no human reader.
-The agents using the changed skill ran the changed checker, so the heading and
+The agents using the 3.0.0 skill ran the 3.0.0 checker, so the heading and
 pitch counts measure whether the instructions and the checker work together.
 They do not measure whether readers prefer the result.
 
@@ -278,7 +278,7 @@ They do not measure whether readers prefer the result.
 ### Timing
 
 The single-token timing sweep was widened to 546 inputs, with headings,
-benefit phrases and runs of capitalised words added, and run on the changed
+benefit phrases and runs of capitalised words added, and run on the 3.0.0
 checker. Each input is one token repeated to 30,000 characters, and none took
 over a second in the checker or the comparison. The sweep of token pairs was
 not run.

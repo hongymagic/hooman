@@ -23,7 +23,7 @@ and permissions, and stored compression for deterministic archives.
 
 ```sh
 python3 scripts/verify.py
-python3 scripts/package.py --check --tag v2.0.0
+python3 scripts/package.py --check --tag v3.0.0
 ```
 
 The verification command runs regression tests, the prose gate and two independent
@@ -73,8 +73,8 @@ claude plugin validate --strict .claude-plugin/marketplace.json
    and push it. For this version:
 
    ```sh
-   git tag -a v2.0.0 -m "Release Hooman 2.0.0"
-   git push origin v2.0.0
+   git tag -a v3.0.0 -m "Release Hooman 3.0.0"
+   git push origin v3.0.0
    ```
 
 4. The release workflow repeats verification, checks the tag, builds the archives

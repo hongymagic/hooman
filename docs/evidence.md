@@ -2,9 +2,9 @@
 
 This page records the findings the design rests on and what each one changed.
 Hooman 2.0 was rebuilt on 18 November 2026 from other skills and catalogues,
-published research and this project's measurements. On 21 November 2026 the
-method was changed from avoiding patterns to writing in a plain style from
-listed facts, after a second review of research and a measurement of older
+published research and this project's measurements. Version 3.0.0, on 21
+November 2026, changed the method from avoiding patterns to writing in a plain
+style from listed facts, after a second review of research and a measurement of older
 human text. The measurements are in the [validation notes](validation.md).
 
 ## Method
@@ -142,7 +142,7 @@ detector, and it reports counts where version 1 reported a score.
 outright became unusable after about two thousand patterns, while backtracking
 past an unwanted string suppressed four times as many and kept quality. That
 favours checking a draft and rewriting the passage over a longer list of
-forbidden words. In the first evaluation of this version, instructions strong
+forbidden words. In the first evaluation of version 2.0, instructions strong
 enough to clear the patterns also cut true claims. The catalogue now says what
 to keep in each family, and the comparison lists sentences that left no trace.
 

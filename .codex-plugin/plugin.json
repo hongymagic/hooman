@@ -1,7 +1,7 @@
 {
   "name": "hooman",
-  "version": "2.0.0",
-  "description": "Check, edit and compare prose so it serves its reader and keeps its facts.",
+  "version": "3.0.0",
+  "description": "An agent skill for writing, editing and reviewing English prose in a plain style, with a checker and a fidelity comparison.",
   "author": {
     "name": "hongymagic",
     "url": "https://github.com/hongymagic"
@@ -18,8 +18,8 @@
   "skills": "./human-writing",
   "interface": {
     "displayName": "Hooman",
-    "shortDescription": "Check, edit and compare your writing",
-    "longDescription": "Draft, edit or review prose. Includes a local English pattern checker, a before-and-after fidelity comparison and an optional separate-model editing helper.",
+    "shortDescription": "Plain-style writing, editing and review",
+    "longDescription": "Writes, edits and reviews English prose in a plain style: facts first, an established document form and label headings. Includes a local checker, a comparison of an edit with its source and an optional editing helper that uses a second model.",
     "developerName": "hongymagic",
     "category": "Productivity",
     "capabilities": [
@@ -28,7 +28,7 @@
     ],
     "websiteURL": "https://github.com/hongymagic/hooman",
     "defaultPrompt": [
-      "Use human-writing to de-slop this draft.",
+      "Use human-writing to edit this draft.",
       "Use human-writing to draft an update from these facts.",
       "Use human-writing to review this prose without rewriting."
     ]
