@@ -24,6 +24,8 @@ BODIES = {
     # A reStructuredText heading: read as Markdown, the tildes would open a fence.
     "docs/guide.rst": b"Usage\n~~~~~\n\nRun the export from the Billing page.\n",
 }
+# The older set: a README as it stood before 2020, with no file extension.
+OLDER = {"README": b"notes exports one invoice file per month.\n"}
 # One cell fails the gate, and one carries separators that end a line for
 # str.splitlines but not for the cache.
 TEXTS = {
@@ -56,7 +58,7 @@ class CalibrationTests(unittest.TestCase):
         self.cache = self.folder / "cache"
         self.manifest = self.folder / "manifest.json"
         self.pinned = {
-            "human": [
+            key: [
                 {
                     "repo": "example/notes",
                     "commit": "0" * 40,
@@ -65,8 +67,10 @@ class CalibrationTests(unittest.TestCase):
                     "words": len(body.split()),
                     "sha256": hashlib.sha256(body).hexdigest(),
                 }
-                for path, body in BODIES.items()
-            ],
+                for path, body in bodies.items()
+            ]
+            for key, bodies in (("human", BODIES), ("older", OLDER))
+        } | {
             "parallel": {
                 name: hashlib.sha256(jsonl(rows(name))).hexdigest()
                 for name in calibrate.cells()
@@ -87,7 +91,7 @@ class CalibrationTests(unittest.TestCase):
 
         def download(url: str) -> bytes:
             if "raw.githubusercontent.com" in url:
-                return bodies[url.split("/" + "0" * 40 + "/")[1]]
+                return {**OLDER, **bodies}[url.split("/" + "0" * 40 + "/")[1]]
             if reply is not None:
                 return reply
             offset = int(re.search(r"offset=(\d+)", url)[1])
@@ -123,8 +127,9 @@ class CalibrationTests(unittest.TestCase):
     def test_manifest_pins_every_source_and_cell_to_a_hash(self):
         manifest = json.loads(MANIFEST.read_text(encoding="utf-8"))
         self.assertGreaterEqual(len(manifest["human"]), 60)
-        for entry in manifest["human"]:
-            with self.subTest(path=entry["path"]):
+        self.assertGreaterEqual(len(manifest["older"]), 30)
+        for entry in manifest["human"] + manifest["older"]:
+            with self.subTest(repo=entry["repo"], path=entry["path"]):
                 self.assertRegex(entry["repo"], r"^[\w.-]+/[\w.-]+$")
                 self.assertRegex(entry["commit"], r"^[0-9a-f]{40}$")
                 self.assertRegex(entry["sha256"], r"^[0-9a-f]{64}$")
@@ -143,7 +148,11 @@ class CalibrationTests(unittest.TestCase):
         sets = calibrate.corpora(self.cache, [])
         self.assertEqual(
             {name: len(texts) for name, texts in sets.items()},
-            {"human-tech": 2, **dict.fromkeys(calibrate.cells(), 200)},
+            {
+                "human-tech": 2,
+                "human-older": 1,
+                **dict.fromkeys(calibrate.cells(), 200),
+            },
         )
         # A second run finds everything in place and asks the network for nothing.
         with mock.patch.object(calibrate, "download", side_effect=AssertionError):
@@ -305,6 +314,7 @@ class CalibrationTests(unittest.TestCase):
         # Seven words in the Markdown file; eight in the reStructuredText one,
         # whose text sits under a heading underlined with tildes.
         self.assertEqual(table["human-tech"][1:4], ["2", "15", "0.0"])
+        self.assertEqual(table["human-older"][1:4], ["1", "7", "0.0"])
         self.assertEqual(table["gpt4o-news"][1:4], ["200", "1400", "100.0"])
         self.assertEqual(table["human-news"][1:4], ["200", "1600", "0.0"])
         self.assertEqual(table["drafts"][1:4], ["2", "7", "50.0"])
@@ -322,6 +332,7 @@ class CalibrationTests(unittest.TestCase):
             (f"drafts={self.folder / 'missing'}", "--extra takes NAME=DIR"),
             (f"drafts={empty}", "no .md or .txt files"),
             (f"human-tech={empty}", "that name is already in use"),
+            (f"human-older={empty}", "that name is already in use"),
             (f"gpt4o-news={empty}", "that name is already in use"),
         ):
             with self.subTest(value):
@@ -331,7 +342,16 @@ class CalibrationTests(unittest.TestCase):
 
     def test_manifest_must_describe_the_corpus(self):
         without_cell = {**self.pinned, "parallel": {"gpt4o-acad": "0" * 64}}
-        for manifest in ({}, [], [{}], {"human": [{}], "parallel": {}}, without_cell):
+        without_older = {key: pin for key, pin in self.pinned.items() if key != "older"}
+        for manifest in (
+            {},
+            [],
+            [{}],
+            {"human": [{}], "parallel": {}},
+            without_cell,
+            without_older,
+            {**self.pinned, "older": []},
+        ):
             self.manifest.write_text(json.dumps(manifest), encoding="utf-8")
             for command in ("fetch", "measure"):
                 with self.subTest(manifest=manifest, command=command), self.serve():

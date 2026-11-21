@@ -521,6 +521,312 @@
       "sha256": "3c5576ebd986a83bc95e2638f914b8bd7981616cab5fc89ecc34cbf7b34fa9b4"
     }
   ],
+  "older": [
+    {
+      "repo": "redis/redis",
+      "commit": "2d236d7aecbf12373618191b7ef4b2365d487c6f",
+      "path": "README.md",
+      "register": "readme",
+      "words": 3198,
+      "sha256": "0e10dd864a5f8cbe43535fb9a9477c45abee4448ffd5238cd4839345b8df5fe1"
+    },
+    {
+      "repo": "tmux/tmux",
+      "commit": "7c78ebce45484716e6e02292d7d107e2b15cdbcb",
+      "path": "README",
+      "register": "readme",
+      "words": 272,
+      "sha256": "8e44e248ca4e4fa7975bbba9298901d477903181694dcc19d70e622796da5cd1"
+    },
+    {
+      "repo": "git/git",
+      "commit": "46c67492aa3ab2779f9322790ca8fffcd5bfaa80",
+      "path": "README.md",
+      "register": "readme",
+      "words": 415,
+      "sha256": "9ee1704839710fb3cc0d8442f0e3ba1ec2af7f6e6f8926477b205cf36d2cf9b5"
+    },
+    {
+      "repo": "curl/curl",
+      "commit": "83c0e96057a6cc61282512dd9204cd78e6c89543",
+      "path": "README.md",
+      "register": "readme",
+      "words": 336,
+      "sha256": "ade064727a0f57ea50e76631b0e4c66367882b4f59b5e86bb37887a0c859304f"
+    },
+    {
+      "repo": "curl/curl",
+      "commit": "9b879160df01e7ddbb4770904391d3b74114302b",
+      "path": "docs/FAQ",
+      "register": "reference",
+      "words": 10788,
+      "sha256": "b6228df48e0f7172fa8ab262db0d81c877227ab2d983e71881747c69ad0302ac"
+    },
+    {
+      "repo": "curl/curl",
+      "commit": "a90d763548f8598dc544ca74719ac60d96135e31",
+      "path": "docs/HISTORY.md",
+      "register": "reference",
+      "words": 1596,
+      "sha256": "f29ebd9fba380693f24c28acae24f7cbe02f65d38afb547d69e390c853e7a9b9"
+    },
+    {
+      "repo": "BurntSushi/ripgrep",
+      "commit": "d7ce274722664169e5e530e9ef833b633b679345",
+      "path": "README.md",
+      "register": "readme",
+      "words": 2284,
+      "sha256": "37414be9a8a2161a103af8250092fd2b5ec91a740b41809bf47bf791562a1cb3"
+    },
+    {
+      "repo": "BurntSushi/ripgrep",
+      "commit": "392682d35296bda5c0d0cccf43bae55be3d084df",
+      "path": "GUIDE.md",
+      "register": "reference",
+      "words": 5104,
+      "sha256": "fd8b8ca153a242f072466d2726e428ab8217a151ba7a173a517d955936f44723"
+    },
+    {
+      "repo": "jqlang/jq",
+      "commit": "0ab71031a6a1c883646e8db8527127cf1b3583cc",
+      "path": "README.md",
+      "register": "readme",
+      "words": 363,
+      "sha256": "6d888dd49fea27654604f5d241054cb5f63a0d37f427051e79c7c341b1367ab9"
+    },
+    {
+      "repo": "junegunn/fzf",
+      "commit": "d4ad4a25db5fd314de355c1a2a8ee9dd209d54c0",
+      "path": "README.md",
+      "register": "readme",
+      "words": 2506,
+      "sha256": "14460540cc488405403c240a1c3f1b05fc285b0c7861b6c63be7ad643ab5d808"
+    },
+    {
+      "repo": "sqlite/sqlite",
+      "commit": "58eaf763551db55e78bce1c9f99ba291e29b92eb",
+      "path": "README.md",
+      "register": "readme",
+      "words": 2243,
+      "sha256": "8f065f666e82710b9f5dcfc74a6dc04e359a1883c655647e2d97882e1ca42787"
+    },
+    {
+      "repo": "openssl/openssl",
+      "commit": "9495a6c45bc7cd69845f9a22eec1fbf8ac735b81",
+      "path": "README",
+      "register": "readme",
+      "words": 420,
+      "sha256": "ddc2506dd108ed8f23b6d7293c10563dd4cf5f3ee2e3e62f4fa0ce9dd4205719"
+    },
+    {
+      "repo": "python/cpython",
+      "commit": "6202d856d637a9b4eb9789b4d4a1edb12d877de5",
+      "path": "README.rst",
+      "register": "readme",
+      "words": 1269,
+      "sha256": "66e8914850662135bc7a53f3ebf51a504d5fef30abb951361d9b5ac7371cfafd"
+    },
+    {
+      "repo": "golang/go",
+      "commit": "235c5cf153a6d6f19d1377071ed3b56c62c74883",
+      "path": "README.md",
+      "register": "readme",
+      "words": 190,
+      "sha256": "7d6b38434715d8ee8a3ab4b7094e931fb4a4a9db3ed3756e33a3a8a0c26516a4"
+    },
+    {
+      "repo": "torvalds/linux",
+      "commit": "c593642c8be046915ca3a4a300243a68077cd207",
+      "path": "Documentation/process/coding-style.rst",
+      "register": "reference",
+      "words": 6041,
+      "sha256": "6664a89d8e5fff36ac216f16d00da6627482034dcfe86d28936ea20f2f5d349f"
+    },
+    {
+      "repo": "torvalds/linux",
+      "commit": "e8686a40a32aee572b87552b0835922a1e47bd87",
+      "path": "Documentation/process/submitting-patches.rst",
+      "register": "reference",
+      "words": 6276,
+      "sha256": "b630cea7fff68e09e2bde7eb2bceba1e4ba76fa0d512355c411cbd6ec8911335"
+    },
+    {
+      "repo": "vim/vim",
+      "commit": "98056533b96b6b5d8849641de93185dd7bcadc44",
+      "path": "README.md",
+      "register": "readme",
+      "words": 808,
+      "sha256": "8872a25fec4cdee6790866fe69932a716e73c8c3f789cd97bdbbce9fe6974200"
+    },
+    {
+      "repo": "ggreer/the_silver_searcher",
+      "commit": "7a8143a41df0537a270b199e9e44b0df19e06a7f",
+      "path": "README.md",
+      "register": "readme",
+      "words": 773,
+      "sha256": "392f5230806a0a734b99d57e177437a60dd0a147d7a5460f38a9030fd6793a6c"
+    },
+    {
+      "repo": "libuv/libuv",
+      "commit": "3e56d99817a94eb0158577925cbc833f1645a460",
+      "path": "README.md",
+      "register": "readme",
+      "words": 1439,
+      "sha256": "de46e0b0d2fe2517ced54ce790c4f1d74eb7cea71e7b984d5ecfdf4c916d6a2a"
+    },
+    {
+      "repo": "facebook/zstd",
+      "commit": "305ac2653ea6ab761f4940aa31e284b816d4b00b",
+      "path": "README.md",
+      "register": "readme",
+      "words": 1059,
+      "sha256": "42a9cb45ba034cfaeb7f5b90da270e0b04c225bf6c82b1b9869125930b20f8e1"
+    },
+    {
+      "repo": "lz4/lz4",
+      "commit": "5dde00e5d33eb617673f62191781907468beadb7",
+      "path": "README.md",
+      "register": "readme",
+      "words": 597,
+      "sha256": "724167ad45dc090e1210fd3c7848ef8c5f93f6831d9979c0aeb3dd7dfebea6fd"
+    },
+    {
+      "repo": "madler/zlib",
+      "commit": "ba9df2111e9c4a95bc48daf402a90873852b10af",
+      "path": "README",
+      "register": "readme",
+      "words": 809,
+      "sha256": "888817de534c2daff9f03c3c575063ebb0b6619d5d7cdadb77f9a6df93a0f83a"
+    },
+    {
+      "repo": "antirez/sds",
+      "commit": "0bb446eb4035b329774e77cf1c2668e3448078c8",
+      "path": "README.md",
+      "register": "readme",
+      "words": 5262,
+      "sha256": "5c6164b379e3a4cfbf784e89dbf780bbcf5e47d359562239d6674b211a580d19"
+    },
+    {
+      "repo": "antirez/kilo",
+      "commit": "62b099af00b542bdb08471058d527af258a349cf",
+      "path": "README.md",
+      "register": "readme",
+      "words": 133,
+      "sha256": "50bb80624f6f3df9e4859e758ebce7a07d61469f48ea54642640bce1b76fcbb6"
+    },
+    {
+      "repo": "sinatra/sinatra",
+      "commit": "c1743256b4a8773eec774f3e3cf00a7c7352a9b3",
+      "path": "README.md",
+      "register": "readme",
+      "words": 10218,
+      "sha256": "30e7a0d78f1a2b04eeb8c1affd02091ec00f4578f6d890ef264ad51accf905b8"
+    },
+    {
+      "repo": "expressjs/express",
+      "commit": "9dadca2c64ae717063b0e9071143065896ebb676",
+      "path": "Readme.md",
+      "register": "readme",
+      "words": 434,
+      "sha256": "5afcb3dd6ce478a5b3b1c85f39f10f2f3e855ed6df167901d38031af75ec3698"
+    },
+    {
+      "repo": "psf/requests",
+      "commit": "d2590ee46c0641958b6d4792a206bd5171cb247d",
+      "path": "README.md",
+      "register": "readme",
+      "words": 403,
+      "sha256": "0c3156ec5590de20d9ea89d3ed11047fa3bfce1b9597eae5ab46c8f247b625b7"
+    },
+    {
+      "repo": "pypa/pip",
+      "commit": "04d8841ace46d49a1443ef56f1205a70019a1a2f",
+      "path": "README.rst",
+      "register": "readme",
+      "words": 243,
+      "sha256": "3785412cacc986277a8636a661eca387c34434d2dd55ca730717203967ef2629"
+    },
+    {
+      "repo": "nodejs/node",
+      "commit": "84819b8a679a9e4c65668af5527609a0e8626cdb",
+      "path": "README.md",
+      "register": "readme",
+      "words": 2036,
+      "sha256": "159643037d7aff9e8f52bb57b48811690f3f6bfaacce31021574b30565d19fff"
+    },
+    {
+      "repo": "rack/rack",
+      "commit": "ee260d7f11d7d7ee26bdaeb8ec2cbc3f5556291a",
+      "path": "README.rdoc",
+      "register": "readme",
+      "words": 1132,
+      "sha256": "2a8bc424c9a6e8d6ff319cbe70153e6744d38c15ce1089eb99bbe2fa5c806aaf"
+    },
+    {
+      "repo": "postgres/postgres",
+      "commit": "7f77cbd996855a06fb742ea11adbe55c42b48fe2",
+      "path": "README",
+      "register": "readme",
+      "words": 157,
+      "sha256": "bae36550f87de6165dbc25fded453754465f89a2a21f2513e2b0598aeb093d18"
+    },
+    {
+      "repo": "memcached/memcached",
+      "commit": "b1425dcb62f98ee20f5be68d0d95e78dfd9c993f",
+      "path": "README.md",
+      "register": "readme",
+      "words": 148,
+      "sha256": "253d4f12ca3e5f75b1c3994de5f04f7567a2c4a7502b1eafdad0cd8c8a630912"
+    },
+    {
+      "repo": "jashkenas/underscore",
+      "commit": "46888bfffb4bb151910b024fe92ee12ae91d0f11",
+      "path": "README.md",
+      "register": "readme",
+      "words": 167,
+      "sha256": "8104fecb1105f43da7b8372f67de3e2eac5ca83bbfa19cfcb3426f6bd42e6fa9"
+    },
+    {
+      "repo": "moby/moby",
+      "commit": "d3787d1fdabd1c01b1de1aa761d76f888a533a01",
+      "path": "README.md",
+      "register": "readme",
+      "words": 514,
+      "sha256": "419455202b0ef97e480d7f8199b26a721a417818bc0e2d106975f74323f25e6c"
+    },
+    {
+      "repo": "ansible/ansible",
+      "commit": "a15fb2637d7c592c98825ec012f90d2fb8029e75",
+      "path": "README.rst",
+      "register": "readme",
+      "words": 573,
+      "sha256": "f28d7d14255b46c34ba8a973346ce08b0247a3adcec145d4b1e131da33e879a3"
+    },
+    {
+      "repo": "hashicorp/terraform",
+      "commit": "f96edbb1138779fdf5303a153c613c0ed4a9f314",
+      "path": "README.md",
+      "register": "readme",
+      "words": 332,
+      "sha256": "b5366c9f6f0903796c32f8a559f05f16cc21ac2dcfbdde619e8fb63484f8f588"
+    },
+    {
+      "repo": "etcd-io/etcd",
+      "commit": "d185a54cb4bfa1fbd063e5b2866aba2faeb136a3",
+      "path": "README.md",
+      "register": "readme",
+      "words": 893,
+      "sha256": "bc3ec084c0eb8060ff4b49097fb1429cdae5077249ee2ff0d72e71faf3d1b5cd"
+    },
+    {
+      "repo": "prometheus/prometheus",
+      "commit": "4be90b201e14b66213b10906592c459a31dc7067",
+      "path": "README.md",
+      "register": "readme",
+      "words": 587,
+      "sha256": "8f2424c54ae261220c92caafe443f28bbb8bfa196b69ac93902dd9bc1d6b8e03"
+    }
+  ],
   "parallel": {
     "gpt4o-acad": "5cb3b41b44c832ccb16c9e6d0290a6d9ebe0e993ca311620fdd94ec0cd180dca",
     "gpt4o-blog": "646458af7817afc2e386d369d19dfd6c91e36af259db18f1c0a798cff55bf5ac",

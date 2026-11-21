@@ -24,6 +24,9 @@ sys.path.insert(0, str(ROOT / "human-writing" / "scripts"))
 from check import audit  # noqa: E402 - load the checker being measured
 
 MANIFEST = Path(__file__).with_name("calibration-corpus.json")
+# Manifest key and corpus name of each set of pinned human texts. The older set
+# holds READMEs and reference documents as they stood before 2020.
+HUMAN_SETS = {"human": "human-tech", "older": "human-older"}
 ROWS = (
     "https://datasets-server.huggingface.co/rows"
     "?dataset=browndw/human-ai-parallel-corpus&config=default&split=train"
@@ -70,11 +73,12 @@ def pins() -> dict:
     try:
         manifest = json.loads(MANIFEST.read_text(encoding="utf-8"))
         described = (
-            bool(manifest["human"])
+            all(manifest[key] for key in HUMAN_SETS)
             and all(
-                isinstance(entry[key], str)
-                for entry in manifest["human"]
-                for key in ("repo", "commit", "path", "sha256")
+                isinstance(entry[field], str)
+                for key in HUMAN_SETS
+                for entry in manifest[key]
+                for field in ("repo", "commit", "path", "sha256")
             )
             and set(manifest["parallel"]) == set(cells())
             and all(isinstance(pin, str) for pin in manifest["parallel"].values())
@@ -123,18 +127,19 @@ def page(body: bytes, name: str) -> list[dict]:
 
 def fetch(cache: Path) -> None:
     manifest = pins()
-    human = cache / "human-tech"
-    human.mkdir(parents=True, exist_ok=True)
-    for name, entry in sources(manifest["human"]):
-        if holds(human / name, entry["sha256"]):
-            continue
-        body = download(
-            f"https://raw.githubusercontent.com/{entry['repo']}/{entry['commit']}/{entry['path']}"
-        )
-        # Nothing reaches the cache until it matches the manifest.
-        if digest(body) != entry["sha256"]:
-            raise RuntimeError(f"hash mismatch for {entry['repo']}/{entry['path']}")
-        (human / name).write_bytes(body)
+    for key, corpus in HUMAN_SETS.items():
+        human = cache / corpus
+        human.mkdir(parents=True, exist_ok=True)
+        for name, entry in sources(manifest[key]):
+            if holds(human / name, entry["sha256"]):
+                continue
+            body = download(
+                f"https://raw.githubusercontent.com/{entry['repo']}/{entry['commit']}/{entry['path']}"
+            )
+            # Nothing reaches the cache until it matches the manifest.
+            if digest(body) != entry["sha256"]:
+                raise RuntimeError(f"hash mismatch for {entry['repo']}/{entry['path']}")
+            (human / name).write_bytes(body)
     parallel = cache / "parallel"
     parallel.mkdir(exist_ok=True)
     for name, first in cells().items():
@@ -160,21 +165,23 @@ def fetch(cache: Path) -> None:
 def corpora(cache: Path, extras: list[str]) -> dict[str, list[tuple[str, str]]]:
     """Corpus name to (format, text) pairs: the whole pinned corpus, then extras."""
     manifest = pins()
-    sets: dict[str, list[tuple[str, str]]] = {"human-tech": []}
+    sets: dict[str, list[tuple[str, str]]] = {}
     # Only what the manifest names, and all of it: a stale, changed or missing
     # file would shift every figure.
-    for name, entry in sources(manifest["human"]):
-        path = cache / "human-tech" / name
-        if not holds(path, entry["sha256"]):
-            raise RuntimeError(
-                f"{path} is missing or differs from the manifest; run fetch first"
-            )
-        text = path.read_text(encoding="utf-8-sig", errors="replace")
-        # reStructuredText is close enough to Markdown for code masking, once
-        # its underlines are out of the way.
-        if path.suffix != ".md":
-            text = RST_UNDERLINE.sub("", text)
-        sets["human-tech"].append(("markdown", text))
+    for key, corpus in HUMAN_SETS.items():
+        sets[corpus] = []
+        for name, entry in sources(manifest[key]):
+            path = cache / corpus / name
+            if not holds(path, entry["sha256"]):
+                raise RuntimeError(
+                    f"{path} is missing or differs from the manifest; run fetch first"
+                )
+            text = path.read_text(encoding="utf-8-sig", errors="replace")
+            # reStructuredText is close enough to Markdown for code masking, once
+            # its underlines are out of the way.
+            if path.suffix != ".md":
+                text = RST_UNDERLINE.sub("", text)
+            sets[corpus].append(("markdown", text))
     for name in cells():
         path = cache / "parallel" / f"{name}.jsonl"
         if not holds(path, manifest["parallel"][name]):
