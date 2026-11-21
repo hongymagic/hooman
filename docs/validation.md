@@ -1,9 +1,11 @@
 # Validation
 
-Version 2.0.0 replaces the pattern checker, adds a fidelity comparison and
-rewrites the instructions around measured findings. The installed skill name and
-plugin discovery paths are retained. The test suite lives in `tests/` and runs
-without a network or a model account:
+This page records how the skill and its scripts were tested and measured.
+Version 2.0.0 replaced the pattern checker and added the fidelity comparison.
+The change of 21 November 2026 rewrote the instructions as a plain-style
+standard and added the heading, pitch and particulars rules; it is described
+under [Plain style](#plain-style-21-november-2026). The test suite lives in
+`tests/` and runs without a network or a model account:
 
 ```sh
 python3 scripts/verify.py
@@ -15,16 +17,18 @@ The checker tests give every blocking rule a phrase that must fire and a set of
 ordinary sentences that must stay clean. They cover the accumulation rules on
 both sides of each threshold, allowances, the interface profile, sentence
 splitting, soft line breaks, Markdown literals, HTML extraction and source
-locations. One test requires every rule ID to appear in the checker reference.
-Timing tests run hostile inputs through both scripts and fail if matching turns
-quadratic, which two paths in the 1.0 Markdown reader did.
+locations. They cover each form of pitched heading, the labels that must pass,
+the share at which pitched headings block, instruction headings and the
+particulars count. One test requires every rule ID to appear in the checker
+reference. Timing tests run hostile inputs through both scripts and fail if
+matching turns quadratic, which two paths in the 1.0 Markdown reader did.
 
 The comparison tests cover changed, dropped and added figures, dates, links,
-code and quotations, equivalent number forms, repeated mentions, names, negation,
-modality, unmatched sentences, vocabulary turnover, flattened typography and
-the `--brief` mode. CLI tests for both scripts cover exit statuses, JSON, stdin
-and input errors. Every input from the two code reviews below is kept as a
-regression test.
+code and quotations, equivalent number forms, repeated mentions, names,
+negation, modality, unmatched sentences, vocabulary turnover, flattened
+typography and the `--brief` mode. CLI tests for both scripts cover exit
+statuses, JSON, stdin and input errors. Every input from the two code reviews
+below is kept as a regression test.
 
 The model helper tests use controlled CLI responses to verify family routing,
 same-family refusal, missing providers, structured replies, process arguments,
@@ -37,8 +41,7 @@ execute all three helpers from the extracted standalone and plugin archives.
 Calibration tests check the corpus manifest and run `fetch` against a stand-in
 for the network that returns short, shortened, repeated and malformed replies,
 a wrong hash and a cut-off body. They repair a damaged cache, refuse to measure
-a part-filled one and run a measurement over a complete one. No test contacts
-a provider or the network.
+a part-filled one and run a measurement over a complete one.
 
 CI applies the same verification command across the supported runtime matrix.
 The repository's prose is checked with the rules it distributes. Specimens in
@@ -61,12 +64,13 @@ measurement; the release notes say when to run it.
 | Gemini specimens | 12 | 3,442 | Gemini CLI 0.68.0 answers; two prompts returned nothing |
 
 The pinned sources and the hash of every file and corpus cell are in
-`scripts/calibration-corpus.json`. No corpus text is committed. The specimen prompts asked for a README, a launch
-post, a LinkedIn post, an incident notice, a status update, an opinion essay,
-interface copy, a pull request description, a chat reply, an explainer, landing
-copy, a speaker bio, a how-to and a newsletter introduction.
+`scripts/calibration-corpus.json`. No corpus text is committed. The specimen
+prompts asked for a README, a launch post, a LinkedIn post, an incident notice,
+a status update, an opinion essay, interface copy, a pull request description,
+a chat reply, an explainer, landing copy, a speaker bio, a how-to and a
+newsletter introduction.
 
-### Share of documents that fail the gate
+### Gate failures
 
 | Corpus | Fail |
 | --- | --- |
@@ -97,12 +101,13 @@ rate, and `inflation.tails` blocks 20 to 29 per cent of the model documents
 and 0.2 per cent of the human ones.
 
 The 2026 specimens fail for different reasons. The stock vocabulary of 2024 is
-nearly absent from them. All six opinion pieces from the three Claude models
-contain the sentence opener `None of this means`, which appears once in the
+nearly absent from them. The three Claude models each wrote an opinion essay
+and a newsletter introduction, and all six pieces contain the sentence opener
+`None of this means`, which appears once in the
 400,000 words of human text. Contrast frames run at 144 to 287 per 100,000
 words in the Claude specimens against 18 to 46 in the human sets.
 
-### Rules that calibration removed or demoted
+### Removed and demoted rules
 
 - An emphasis rule counting `actually`, `really` and `honestly` was dropped.
   Human blogs use `really` at 200 per 100,000 words and the GPT-4o blog text at
@@ -134,6 +139,159 @@ words in the Claude specimens against 18 to 46 in the human sets.
   prompt was run once, and exact model identifiers were not captured.
 - The measurement is of the checker. It says which patterns separate these
   texts. It does not say that readers prefer text without them.
+
+## Plain style: 21 November 2026
+
+The owner reported that text written with version 2.0.0 still read as
+marketing: headings that invite, openers that state a benefit. The 2.0.0
+checker passed the project's own README with no finding. This section records
+what was measured before and after the instructions and the checker were
+changed.
+
+### Older human set
+
+A second human corpus was pinned: 38 READMEs and reference documents from 34
+public projects, each at its last commit before 2020. It holds 59,354 words of
+prose after code is removed. The projects were chosen by the maintainer as
+well-known command-line tools, libraries and servers; the set is not a random
+sample. `scripts/calibrate.py` reports it as `human-older`.
+
+### Headings
+
+The checker's heading tests were run over every Markdown heading in each set.
+
+| Corpus | Headings | Pitched | Instructions | Median words | Four words or fewer |
+| --- | --- | --- | --- | --- | --- |
+| Human, technical and business | 402 | 15 (3.7%) | 3 (0.7%) | 3 | 77% |
+| Human, older | 285 | 5 (1.8%) | 4 (1.4%) | 2 | 93% |
+| 2026 model specimens | 159 | 25 (15.7%) | 11 (6.9%) | 3 | 72% |
+
+A pitched heading invites, teases or addresses the reader, or is a sentence.
+Most of the 20 human cases use `your` in a tutorial or a checklist. No human
+document reaches the blocking threshold of three pitched headings that are a
+quarter of its headings; five of the 68 model specimens do, all of them
+landing pages. Instruction headings stay advisory: guides that follow Google's
+style use them for tasks, and the checker cannot tell a procedure from a
+README.
+
+### Particulars
+
+A sentence carries a particular when it holds a digit, an acronym, a
+capitalised word after its first, a quotation, inline code or a link. Sentences
+of four words or more in paragraphs and list items are counted, in documents
+with at least twelve of them.
+
+| Corpus | Documents | 10th percentile | Median | 90th percentile | Under 35% |
+| --- | --- | --- | --- | --- | --- |
+| Human, older | 34 | 59% | 72% | 88% | 0% |
+| Human, technical and business | 63 | 27% | 62% | 83% | 19% |
+| Human academic | 186 | 45% | 77% | 100% | 3% |
+| Human news | 200 | 40% | 73% | 92% | 6% |
+| Human blog | 194 | 19% | 50% | 80% | 25% |
+| GPT-4o academic | 200 | 5% | 36% | 76% | 44% |
+| GPT-4o news | 200 | 19% | 43% | 70% | 32% |
+| GPT-4o blog | 200 | 4% | 23% | 56% | 70% |
+| 2026 model specimens | 43 | 4% | 41% | 75% | 42% |
+
+The human and GPT-4o rows of one register are the same 200 documents, begun by
+a person and continued by each. The gap holds in all three.
+
+`particulars.share` reports a document in which under 35 per cent of counted
+sentences carry a particular. `particulars.run` reports four consecutive
+sentences with none. Both are advisory and outside `density.signals`: when they counted, the human blog set
+failed the gate at 10.5 per cent, up from 5.0, because personal narrative
+carries few particulars. The 12 human technical documents under 35 per cent
+are handbook pages, guidance and statements of principle.
+
+### Pitch phrasing
+
+| Rule | Human, technical | Human, older | 2026 specimens |
+| --- | --- | --- | --- |
+| `pitch.heading` | 13.1 | 8.4 | 170.7 |
+| `pitch.benefit` | 64.6 | 45.5 | 95.6 |
+| `pitch.call` | 0.9 | 0.0 | 0.0 |
+| `pitch.praise` | 54.1 | 16.8 | 68.3 |
+| `formatting.instructions` | 0.0 | 1.7 | 27.3 |
+
+Findings per 100,000 words. Benefit phrasing is 1.5 to 2 times as common in
+the model specimens and occurs in four of the 14 prompts: 2.4 per 1,000 words
+in READMEs, 3.0 in launch posts, 3.8 in landing pages and 5.8 in how-to
+guides. People write it too, so the rule is advisory. The only match of
+`pitch.call` in the specimens falls inside a heading and is reported as
+`pitch.heading`.
+
+### Change in gate failures
+
+| Corpus | 2.0.0 | After |
+| --- | --- | --- |
+| Human, technical and business | 16.9% | 16.9% |
+| Human, older | 7.9% | 7.9% |
+| Human academic, blog, news | 3.5%, 5.0%, 1.5% | 3.5%, 5.0%, 1.5% |
+| GPT-4o academic, blog, news | 98.0%, 61.5%, 85.5% | 98.0%, 62.0%, 86.0% |
+| 2026 model specimens | 17.6% | 23.5% |
+
+The three older documents that fail do so on `staging.announcement` or
+`rhythm.negation`.
+
+### Old and new instructions
+
+Claude Sonnet and Claude Haiku subagents each wrote six documents twice, once
+with the 2.0.0 skill and once with the changed one: a README, a launch post, a
+status update, landing page copy and a how-to from supplied facts, and an edit
+of the first 95 lines of the 2.0.0 README. Each agent was told only where its
+skill was. The 24 outputs were scored with the changed checker and with
+`compare.py`.
+
+| Measure | 2.0.0 skill | Changed skill |
+| --- | --- | --- |
+| Pitched headings | 7 of 38 | 0 of 40 |
+| Benefit, call and praise findings | 3 | 0 |
+| Words in all 12 documents | 1,867 | 1,601 |
+| Median share of sentences with a particular | 49% | 61.5% |
+| Figures, links or quotations added to the supplied facts | 0 | 0 |
+
+With the 2.0.0 skill both models returned the README edit unchanged, because
+the 2.0.0 checker reported nothing in it. Their landing pages used the headings
+`What you get`, `Works where your team works` and `Bring your passwords with
+you`. With the changed skill both models used `Features`, `Platforms`,
+`Security` and `Pricing`, and both retitled `Try the checker` as `Checker`. One
+of the two left the heading `Compare an edit with its source` in place. The
+edit instruction now says to retitle every heading that is not a label; that
+wording was added after this run and has not been run.
+
+All four agents wrote a launch post shorter than the 400 words requested and
+said why: the facts supplied did not fill it.
+
+This comparison has 12 documents to an arm, one run each, and no human reader.
+The agents using the changed skill ran the changed checker, so the heading and
+pitch counts measure whether the instructions and the checker work together.
+They do not measure whether readers prefer the result.
+
+### Measurements that changed no rule
+
+- Padding such as `in order to`, `the fact that` and `very` runs at 2.1 to 5.2
+  per 1,000 words in the human sets and 0.6 to 1.3 in the GPT-4o text. A rule
+  against it would move text away from the human sets, so none was added.
+- Second-person address, contractions and exclamation marks vary more between
+  human registers than between people and models.
+
+### Timing
+
+The single-token timing sweep was widened to 546 inputs, with headings,
+benefit phrases and runs of capitalised words added, and run on the changed
+checker. Each input is one token repeated to 30,000 characters, and none took
+over a second in the checker or the comparison. The sweep of token pairs was
+not run.
+
+### Limits
+
+- The thresholds were chosen on the documents they are reported on.
+- The particulars count is a proxy. It cannot see a definition written in
+  lower case, and it counts any capitalised word as a name.
+- The model specimens are 68 drafts from one prompt set, run once.
+- The older set covers READMEs and reference documents in English from
+  software projects. It says nothing about memos, reports or letters, where the
+  standard rests on the forms and the exemplars.
 
 ## Edit evaluation: 18 November 2026
 
@@ -185,7 +343,7 @@ the reader better, the one with the better voice and the better edit overall.
 - Against skill 1.0 the judge preferred the 2.0 edit for the reader in 14 of 21
   comparisons.
 
-### Findings it does not support
+### Findings not supported
 
 - The judge's overall verdict against 1.0 swung from 5 to 2 in favour to 1 to 6
   against between two runs, with the rival texts unchanged. It judged one
@@ -240,9 +398,9 @@ fixed. The 72 tests of the day before had passed throughout.
 | Speed | Two inputs took 7 and 15 seconds |
 | Calibration script | A short or empty download was cached as complete, a wrong file stayed in the cache, and stale files were measured |
 
-Each input is now a regression test. The comparison no longer borrows the
-checker's reading of a document: the checker skips quotations and nested items
-because they often hold specimens, and a comparison has to read them.
+The comparison no longer borrows the checker's reading of a document: the
+checker skips quotations and nested items because they often hold specimens,
+and a comparison has to read them.
 
 A sweep of repeated tokens, such as 30,000 backticks or 15,000 unclosed link
 targets, then found two more slow paths, one of them introduced by the fix for
@@ -262,8 +420,8 @@ scored again with the fixed scripts and its table did not change.
 Fixing the first review meant rewriting most of the comparison script, so a
 second reviewer went over the rewritten code and the changed parts of the other
 two scripts. It was again a separate session told to run every finding. It
-reported 39, more than the first. One was confirmed against the live corpus
-server and the rest were reproduced locally before they were fixed.
+reported 39. One was confirmed against the live corpus server and the rest were
+reproduced locally before they were fixed.
 
 | Area | What was wrong |
 | --- | --- |
@@ -276,7 +434,7 @@ server and the rest were reproduced locally before they were fixed.
 | Crash and speed | A marked section such as `<![ x ]>` crashed the HTML parser of some Python releases. Three more inputs took four to 28 seconds |
 | Calibration script | A corpus cell was accepted on its row count and identifiers, so a repeated page or shortened texts were cached. The guard against shortened texts read a field the server never sets there. A reply of the wrong shape raised an error with a traceback. Four reStructuredText files were measured in part, because a heading underlined with tildes opened a code fence. A part-filled cache was measured without complaint |
 
-The main changes follow from three decisions. The comparison has its own
+The main changes were these. The comparison has its own
 reader for HTML, which also reads the tags, comments and entities a Markdown
 file carries. Each pass marks code, quotations and link targets in the text and
 leaves the marks for the last step, so content that a later pass drops, such as
@@ -335,11 +493,11 @@ the instructions for those jobs, which were then filled: a format for reviews,
 where gaps go under “copy only”, and what to do with no existing screens to
 compare against.
 
-Two things were found on the way. Codex still loads a personal `AGENTS.md` under
-the helper's isolation flags, which the separate model guide now states. And the
-Claude CLI on the test host was not signed in, so no live Claude run was made:
-the helper exited 2 and saved nothing, as documented. Its Claude flags were
-checked against the 2.1.326 help output only.
+Codex still loads a personal `AGENTS.md` under the helper's isolation flags,
+which the separate model guide now states. The Claude CLI on the test host was
+not signed in, so no live Claude run was made: the helper exited 2 and saved
+nothing, as documented. Its Claude flags were checked against the 2.1.326 help
+output only.
 
 ## Editorial checks
 
@@ -363,7 +521,7 @@ whenever changing the editorial workflow:
 | Interface strings for an existing product | Label the section, say the number, reuse the product's terms |
 | A separate model is unavailable | Complete the local edit and describe the unavailable pass accurately |
 
-These cases guide editorial review. Automated checks establish the tooling
-contracts they exercise. They cannot establish semantic fidelity, author voice,
-automatic skill selection or writing quality across hosts and models. No live
-provider call or native ChatGPT or Claude upload is part of the automated suite.
+Automated checks establish the tooling contracts they exercise. They cannot
+establish semantic fidelity, author voice, automatic skill selection or writing
+quality across hosts and models. No live provider call or native ChatGPT or
+Claude upload is part of the automated suite.

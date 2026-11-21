@@ -4,7 +4,7 @@
 
 Maintain the installed skill in `human-writing/`. Both repository plugin manifests
 point there. The package builder includes the instructions, references, prompt,
-checker, model helper and project licence. Tests and release tooling stay outside
+checker, comparison, model helper and project licence. Tests and release tooling stay outside
 the runtime bundle. Python caches are excluded.
 
 | Asset | Layout |
@@ -19,7 +19,7 @@ manifests. Only manifest discovery paths change during packaging. Canonical file
 retain their bytes and relative paths. Entries use sorted names, fixed timestamps
 and permissions, and stored compression for deterministic archives.
 
-## Verify a change
+## Verification
 
 ```sh
 python3 scripts/verify.py
@@ -46,13 +46,15 @@ python3 scripts/calibrate.py measure --rules
 `.calibration/`, which git ignores. `scripts/calibration-corpus.json` pins
 every human text and every cell of the parallel corpus by hash. Nothing reaches
 the cache until it matches its pin, and a damaged or partial cache is fetched
-again. `measure` reads exactly what the manifest names and stops if any of it
-is missing or changed. If the published corpus changes, `fetch` stops with a
-mismatch: pin the new cells and measure again on purpose. `measure` prints the
-share of documents that fail the gate and the rate of every rule. Add fresh
-model drafts with `--extra NAME=DIR`. Record the figures and the date in the
-[validation notes](validation.md). Word habits change with each model
-generation, so review the stock lists whenever the model corpus is refreshed.
+again. If the published corpus changes, `fetch` stops with a mismatch: pin the
+new cells and measure again on purpose.
+
+`measure` reads exactly what the manifest names and stops if any of it is
+missing or changed. `measure` prints the share of documents that fail the gate
+and the rate of every rule. Add fresh model drafts with `--extra NAME=DIR`.
+Record the figures and the date in the [validation notes](validation.md). Word
+habits change with each model generation, so review the stock lists whenever
+the model corpus is refreshed.
 
 Validate Claude manifests with the installed CLI when available:
 
@@ -61,7 +63,7 @@ claude plugin validate --strict .claude-plugin/plugin.json
 claude plugin validate --strict .claude-plugin/marketplace.json
 ```
 
-## Publish
+## Publication
 
 1. Update `VERSION`, both host manifests, the Claude marketplace entry and versioned
    examples. Keep a stable semantic version; prerelease strings are unsupported.
@@ -78,17 +80,30 @@ claude plugin validate --strict .claude-plugin/marketplace.json
 4. The release workflow repeats verification, checks the tag, builds the archives
    and publishes both ZIPs with checksums. Confirm the three attached assets.
 
+Verify downloaded assets beside `SHA256SUMS` with
+`sha256sum --check SHA256SUMS` on Linux or `shasum -a 256 -c SHA256SUMS` on
+macOS. A checksum verifies bytes, not publisher identity.
+
 The workflow uses `GITHUB_TOKEN`. Build jobs have read access; only publishing
 receives `contents: write`. Checkout does not retain credentials. Releases do not
 submit a public plugin listing or install the package into anyone's host.
 
+## Recovery
+
+If the failure precedes publication, inspect the logs and rerun infrastructure
+failures for the same tag. Do not move a published tag. Correct tagged content
+in a new version. If an incomplete draft release remains, verify its target and
+assets before removing that draft and rerunning. The workflow does not
+overwrite an existing release.
+
 ## Runtime and action pins
 
 CI uses Python 3.15.0, the current stable release verified against
-[Python's downloads](https://www.python.org/downloads/). It also checks the minimum
-supported series on Python 3.12.15 on Linux. Supporting 3.12 allows hosts with that
+[Python's downloads](https://www.python.org/downloads/). Full Python 3.15.0
+checks run on Linux, macOS and Windows. CI also checks the minimum supported
+series on Python 3.12.15 on Linux. Supporting 3.12 allows hosts with that
 maintained runtime to execute dependency-free helpers; no newer runtime feature
-is required. Full Python 3.15.0 checks run on Linux, macOS and Windows.
+is required.
 
 Action tags were resolved to these commits on 12 October 2026:
 
@@ -99,21 +114,12 @@ Action tags were resolved to these commits on 12 October 2026:
 | upload-artifact | 7.0.2 | `cf430e030ddbb5b0abf93d22962f4752f3646cd9` |
 | download-artifact | 8.0.2 | `9000827ccba6bdab643e8b6fd33ac0654aef8333` |
 
-Dependabot checks action updates monthly. Hooman does not install or pin the
-optional model CLIs; their host manages updates and authentication. The helper
-uses current documented structured-output options and a CLI default model unless
-`--model` is supplied. Consult the [Codex non-interactive reference](https://learn.chatgpt.com/docs/non-interactive-mode)
+Dependabot checks action updates monthly.
+
+Hooman does not install or pin the optional model CLIs; their host manages
+updates and authentication. The helper uses current documented
+structured-output options and a CLI default model unless `--model` is
+supplied. Consult the
+[Codex non-interactive reference](https://learn.chatgpt.com/docs/non-interactive-mode)
 and [Claude CLI reference](https://code.claude.com/docs/en/cli-reference) when
 updating those integrations.
-
-## Recover a failed release
-
-If the failure precedes publication, inspect the logs and rerun infrastructure
-failures for the same tag. Do not move a published tag. Correct tagged content in
-a new version. If an incomplete draft release remains, verify its target and
-assets before removing that draft and rerunning. The workflow does not overwrite
-an existing release.
-
-Verify downloaded assets beside `SHA256SUMS` with `sha256sum --check SHA256SUMS`
-on Linux or `shasum -a 256 -c SHA256SUMS` on macOS. A checksum verifies bytes, not
-publisher identity.
