@@ -159,6 +159,18 @@ PROMOTION = (
     r"breathtaking",
     r"lightning[ -]fast",
     r"blazing(?:ly)?[ -]fast",
+    r"powerful",
+    r"intuitive",
+    r"user[ -]friendly",
+    r"easy[ -]to[ -]use",
+    r"feature[ -]rich",
+    r"battle[ -]tested",
+    r"rock[ -]solid",
+    r"enterprise[ -]grade",
+    r"next[ -]gen(?:eration)?",
+    r"frictionless",
+    r"delightful",
+    r"turnkey",
 )
 INTENSIFIERS = (
     r"genuinely",
@@ -365,12 +377,6 @@ RULES = (
         "Say what the role or effect is; keep the phrase only if that is all you know.",
     ),
     Rule(
-        "inflation.promotion",
-        "review",
-        words(PROMOTION),
-        "Describe the specific capability; keep literal and technical uses.",
-    ),
-    Rule(
         "inflation.vocabulary",
         "review",
         words(STOCK),
@@ -402,6 +408,38 @@ RULES = (
         r"|\b(?:may|might|could) (?:eventually|ultimately) \w+"
         r"|\bdoes not (?:by itself|in itself|on its own) (?:establish|prove|mean)\b",
         "Keep the one qualification that carries the actual uncertainty.",
+    ),
+    # Pitch: the text sells the subject where it should describe it.
+    Rule(
+        "pitch.praise",
+        "review",
+        words(PROMOTION),
+        "Name the capability or give the figure; keep literal and technical uses.",
+    ),
+    Rule(
+        "pitch.benefit",
+        "review",
+        r"\b(?:helps?|lets?|allows?|enables?|empowers?) (?:you|your (?:\w+ )?(?:team|users|customers|business|organi[sz]ation|company)|teams|developers|businesses|anyone|everyone)\b"
+        r"|\bso (?:that )?you (?:can|don't have to|never have to)\b"
+        r"|\bmak(?:e|es|ing) it (?:easy|simple|effortless|painless|a breeze) (?:to|for)\b|\beasier than ever\b"
+        r"|\bwithout the (?:hassle|headache|pain|complexity|guesswork|stress|overhead|bloat|fuss)\b"
+        r"|\b(?:hassle|pain|worry|stress|friction)[ -]free\b|\bsay goodbye to\b"
+        r"|\b(?:all|everything) you need\b|\ball[ -]in[ -]one\b|\bone[ -]stop\b"
+        r"|\bpeace of mind\b|\bfocus on what (?:matters|you do best)\b|\btake (?:full |back )?control of\b"
+        r"|\bstay (?:on top of|ahead of|in control)\b|\bwith (?:confidence|ease)(?=[.,;:!?)]|\s*$)"
+        r"|\b(?:built|designed|made|crafted|engineered) (?:for|with) (?:\w+ ){0,3}in mind\b|\bfrom the ground up\b"
+        r"|\byou(?:'ll| will) (?:love|never|always)\b|\byour \w+ (?:will thank you|deserves?)\b"
+        r"|\b(?:works?|runs?) (?:where(?:ver)?|the way|how) you (?:work|do)\b"
+        r"|\bin (?:seconds|minutes|no time|just (?:a few |\w+ )?(?:clicks?|steps?|minutes?|seconds?|lines?))\b",
+        "Say what it does; the reader can work out what that is worth.",
+    ),
+    Rule(
+        "pitch.call",
+        "review",
+        r"\bget started (?:today|now|in (?:seconds|minutes)|for free)\b|\b(?:try|start) (?:it|\w+) (?:today|now|for free)\b"
+        r"|\bsign up (?:today|now|for free)\b|\bready to \w+[^.!?\n]{0,60}\?|\bwhat are you waiting for\b"
+        r"|\blook no further\b|\bdon't miss\b|\bjoin (?:thousands|hundreds|millions)\b|\bgive it a try\b|\bcheck it out\b",
+        "Give the next step once, as an instruction.",
     ),
     # Leftovers: chat wrappers and drafting moves never meant for the reader.
     Rule(
@@ -571,6 +609,22 @@ COMPUTED = {
         "error",
         "Trailing -ing clauses recur; give each fact its own verb or cut the gloss.",
     ),
+    "pitch.heading": (
+        "review",
+        "A heading is a label: name what the section holds.",
+    ),
+    "pitch.headings": (
+        "error",
+        "Headings address or sell to the reader; replace them with labels.",
+    ),
+    "particulars.share": (
+        "review",
+        "Few sentences name a thing or give a figure; state the particular or cut the sentence.",
+    ),
+    "particulars.run": (
+        "review",
+        "No number, name, code or link in this run; say what it refers to, or cut it.",
+    ),
     "formatting.labels": (
         "review",
         "Bold labels open most list items; keep labels that carry information.",
@@ -583,9 +637,9 @@ COMPUTED = {
         "review",
         "Use sentence case unless the house style sets title case.",
     ),
-    "formatting.headline": (
+    "formatting.instructions": (
         "review",
-        "A heading is a label: name what the section holds.",
+        "Label the section and keep the instruction in its steps, unless the headings are the steps.",
     ),
     "formatting.rules": (
         "review",
@@ -627,9 +681,48 @@ BOLD = re.compile(r"\*\*[^*\n]{1,80}\*\*")
 BOLD_LABEL = re.compile(r"[ \t]*(?:[-*+]|\d{1,3}[.)])[ \t]+\*\*[^*\n]{1,60}\*\*")
 RULE_LINE = re.compile(r"[ \t]*(?:-{3,}|\*{3,}|_{3,})[ \t]*")
 HASHTAGS = re.compile(r"(?<![\w#])#[A-Za-z]\w+(?:\s+#[A-Za-z]\w+){3,}")
-STORY_HEADING = re.compile(
-    r"[ \t]{0,3}#{1,6}[ \t]+(?!How to\b|What's new\b|What is\b)(?:Where|What|Why|How|When)\b(?: \S+){3,}"
+HEADING_MARK = re.compile(r"[ \t]{0,3}#{1,6}[ \t]+(?:\d{1,3}[.)][ \t]+)?")
+# A heading that invites, addresses or teases the reader, or reads as a slogan.
+PITCH_HEADING = re.compile(
+    r"(?:Try|Discover|Explore|Meet|Unlock|Unleash|Enjoy|Experience|Join|Ditch|Boost"
+    r"|Supercharge|Transform|Imagine|Introducing|Welcome to|Say (?:goodbye|hello)|Get)\b"
+    r"|(?:Why|What|Where|When|Who|How)\b(?! to\b)[ \t]+\S[^?\n]*$"
+    r"|(?:Ready|Tired|Want|Need|Looking|Still|Struggling|Sick)\b[^\n]*\?$"
+    r"|(?:\S+[ \t]+){2,}\S*[A-Za-z)\"'][.!]$"
+    r"|[^\n]*\b(?:you|your|yours|you're|you'll|you've)\b",
+    re.I,
 )
+# A heading that gives an instruction. Words that are also nouns count only
+# before a determiner, so "Build instructions" and "Use cases" stay labels.
+ACTION = (
+    "install|configure|create|add|compare|verify|choose|write|make|find|read|ask|keep"
+    "|protect|deploy|remove|delete|enable|disable|define|open|close|save|connect"
+    "|publish|recover|put|give|take|bring|manage|send|clone|convert|generate|avoid"
+    "|prefer|treat|execute|separate|declare|know|learn|follow|apply|select|specify"
+    "|provide|include|exclude|combine|validate|migrate|uninstall|contribute"
+)
+ACTION_OR_NOUN = (
+    "run|build|use|set|check|test|start|stop|update|upgrade|download|upload|import"
+    "|export|fix|debug|review|report|share|sign|log|edit|change|call|pass|return"
+    "|store|scale|handle|monitor|pick|turn|do|query|filter|sort|release"
+)
+DETERMINER = (
+    r"(?:the|a|an|your|our|this|that|these|those|it|them|each|every|all|any|one|some)\b"
+)
+INSTRUCTION_HEADING = re.compile(
+    rf"(?:{ACTION})[ \t]+(?:{DETERMINER}|(?:from|with|to|in|on|as|for|by|up|out|and)\b)"
+    rf"|(?:{ACTION_OR_NOUN})[ \t]+{DETERMINER}"
+    r"|(?:install|configure|verify|publish|uninstall|deploy|contribute|migrate)$",
+    re.I,
+)
+# What a reader could check or act on: a figure, a quotation, an acronym or a
+# name after the first word. Code and links are read from the source, where
+# masking has not blanked them.
+PARTICULAR = re.compile(
+    r"\d|\"[^\"\n]{3,}\"|\b[A-Z]{2,}|(?<=[a-z0-9,;)\]] )[\"'(\[]?[A-Z][A-Za-z]"
+)
+LITERAL = re.compile(r"`|\]\(|\]\[|https?://|<(?:a|code|kbd|samp|var)\b", re.I)
+ITEM_MARK = re.compile(r"[ \t]*(?:[-*+]|\d{1,3}[.)])[ \t]+(?:\[[ xX]\][ \t]+)?")
 
 # Accumulation thresholds, set against the corpora described in docs/validation.md.
 CLUSTER_WINDOW = 100
@@ -642,9 +735,15 @@ UNIFORM_SENTENCES = 12
 UNIFORM_VARIATION = 0.30
 DENSITY_MINIMUM = 6
 DENSITY_RATE = 10.0
-# Evidence findings ask for a source, and whether formatting is decoration
-# depends on the document's format, which the checker cannot see.
-UNCOUNTED = ("evidence", "formatting")
+PITCH_HEADINGS = 3
+PITCH_HEADING_SHARE = 0.25
+# Sentences of four words or more in paragraphs and list items are counted.
+PARTICULAR_SENTENCES = 12
+PARTICULAR_SHARE = 0.35
+PARTICULAR_RUN = 4
+# Evidence findings ask for a source, whether formatting is decoration depends
+# on the document's format, and narrative legitimately carries few particulars.
+UNCOUNTED = ("evidence", "formatting", "particulars")
 
 
 @dataclass(frozen=True)
@@ -1210,6 +1309,7 @@ class Audit:
     ) -> None:
         # Standard input arrives with its line endings as written.
         source = NEWLINE.sub("\n", source)
+        self.source = source
         self.prose = extract(source, format)
         if not self.prose.text.strip():
             raise ValueError("no prose to check after excluding literal content")
@@ -1222,6 +1322,8 @@ class Audit:
         self.thousands = max(self.words, 1) / 1000
         self.structure = blocks(self.text)
         self.findings: list[tuple[int, int, Finding]] = []
+        # Per category, the characters a finding already covers.
+        self.claimed: dict[str, bytearray] = {}
         self.stats: dict[str, float | int] = {"words": self.words}
 
     def add(
@@ -1268,11 +1370,10 @@ class Audit:
     def match_rules(self) -> None:
         # Errors claim their span first, so a weaker rule in the same category
         # cannot report the same words again.
-        claimed: dict[str, bytearray] = {}
         for rule in sorted(RULES, key=lambda rule: rule.severity != "error"):
             if self.profile not in rule.profiles:
                 continue
-            mask = claimed.setdefault(rule.category, bytearray(len(self.text)))
+            mask = self.claimed.setdefault(rule.category, bytearray(len(self.text)))
             flags = re.M if rule.cased else re.M | re.I
             opening = rule.pattern.startswith(OPENING)
             for match in re.finditer(rule.pattern, self.text, flags):
@@ -1421,9 +1522,9 @@ class Audit:
         ]
         for rule, test, label in (
             ("formatting.titlecase", title_case, "use title case"),
-            ("formatting.headline", STORY_HEADING.match, "open like a story"),
+            ("formatting.instructions", INSTRUCTION_HEADING.match, "are instructions"),
         ):
-            matched = [block for block in subheadings if test(self.slice(block))]
+            matched = [block for block in subheadings if test(self.heading(block)[1])]
             if len(matched) >= 2:
                 self.computed(
                     rule,
@@ -1458,6 +1559,86 @@ class Audit:
                 decorated[0].end,
                 f"{len(decorated)} headings or list items carry emoji",
             )
+
+    def heading(self, block: Block) -> tuple[int, str]:
+        """Where a heading's words start, and the words without closing marks."""
+        raw = self.slice(block)
+        lead = HEADING_MARK.match(raw).end()
+        lead += len(raw) - lead - len(raw[lead:].lstrip("*_\"'"))
+        return lead, raw[lead:].rstrip(" \t#*_")
+
+    def check_headings(self) -> None:
+        headings = [block for block in self.structure if block.kind == "heading"]
+        pitched = []
+        for block in headings:
+            lead, text = self.heading(block)
+            if PITCH_HEADING.match(text):
+                pitched.append(block)
+                start = block.start + lead
+                self.computed("pitch.heading", start, start + len(text))
+                # The heading is one finding; its phrases are not reported again.
+                mask = self.claimed.setdefault("pitch", bytearray(len(self.text)))
+                mask[block.start : block.end] = b"\x01" * (block.end - block.start)
+        if (
+            len(pitched) >= PITCH_HEADINGS
+            and len(pitched) >= len(headings) * PITCH_HEADING_SHARE
+        ):
+            self.computed(
+                "pitch.headings",
+                pitched[0].start,
+                pitched[0].end,
+                f"{len(pitched)} of {len(headings)} headings address or sell to the reader",
+            )
+
+    def particular(self, block: Block, sentence: Sentence) -> bool:
+        """True when a sentence carries a figure, a name, code, a link or a quotation."""
+        text = self.slice(sentence)
+        if block.kind == "item" and sentence.start == block.sentences[0].start:
+            text = text[ITEM_MARK.match(text).end() :]
+        positions = self.prose.positions
+        written = self.source[
+            positions[sentence.start] : positions[sentence.end - 1] + 1
+        ]
+        return bool(PARTICULAR.search(text) or LITERAL.search(written))
+
+    def check_particulars(self) -> None:
+        counted = carrying = 0
+        runs: list[list[Sentence]] = []
+        for block in self.structure:
+            if block.kind not in ("paragraph", "item"):
+                continue
+            run: list[Sentence] = []
+            for sentence in block.sentences:
+                if sentence.words < 4:
+                    continue
+                counted += 1
+                if self.particular(block, sentence):
+                    carrying += 1
+                    run = []
+                    continue
+                if not run:
+                    runs.append(run)
+                run.append(sentence)
+        if not counted:
+            return
+        self.stats["particulars_percent"] = round(100 * carrying / counted)
+        if counted >= PARTICULAR_SENTENCES and carrying < counted * PARTICULAR_SHARE:
+            first = self.structure[0]
+            self.computed(
+                "particulars.share",
+                first.start,
+                first.end,
+                f"{carrying} of {counted} sentences carry a number, a name, code or a link",
+            )
+        for run in runs:
+            if len(run) >= PARTICULAR_RUN:
+                opening = re.sub(r"\s+", " ", self.slice(run[0]))
+                self.computed(
+                    "particulars.run",
+                    run[0].start,
+                    run[-1].end,
+                    f"{len(run)} sentences from: {opening[:60]}",
+                )
 
     def check_density(self) -> None:
         signals = [
@@ -1501,14 +1682,19 @@ def audit(
     profile: str = "prose",
 ) -> dict:
     document = Audit(source, format, allowed or {}, profile)
-    document.match_rules()
     if profile == "interface":
+        document.match_rules()
         document.check_interface()
     else:
+        # Markdown headings are read first, so a pitched heading is one finding.
+        if format != "html":
+            document.check_headings()
+        document.match_rules()
         document.check_sentences()
         document.check_paragraphs()
         document.check_uniformity()
         document.check_accumulation()
+        document.check_particulars()
         if format != "html":
             document.check_formatting()
         document.check_density()

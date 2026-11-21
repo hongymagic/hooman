@@ -1,6 +1,8 @@
-# Running and interpreting the checker
+# Checker
 
-Python 3.12 or newer is supported. The checker has no third-party dependencies,
+`scripts/check.py` reports phrasing, headings and paragraphs in English prose
+that depart from the plain-style standard. Python 3.12 or newer is supported.
+The checker has no third-party dependencies,
 makes no network calls and never writes to the files it reads. Commands below
 run from the skill directory; use absolute script paths from elsewhere.
 
@@ -16,17 +18,16 @@ or `--format html` for pasted documents. Extensions select Markdown for `.md`,
 `.markdown` and `.mdown`, HTML for `.html` and `.htm`, and plain text otherwise.
 An explicit `--format` overrides that choice. UTF-8 files may include a BOM.
 
-## What a result means
+## Results
 
 The summary line reads `pass` or `needs editing`, followed by the word count and
 the number of blocking and advisory findings. Under `--strict` it reads `needs
-review` when only advisory findings remain. There is no score. A count out of
-five invited the reading that five meant good, and the checker cannot know that.
+review` when only advisory findings remain. There is no score.
 
 | Finding | Meaning | Default gate |
 | --- | --- | --- |
 | `error` | An empty phrase, a chat leftover or an accumulation | Fails |
-| `review` | Context decides: a stock word, a contrast, a formatting habit | Does not fail |
+| `review` | Context decides: a stock word, a contrast, a heading, a formatting habit | Does not fail |
 | Finding with an allowance | The caller gave a reason to keep this rule's matches | Does not fail |
 
 A pass means no blocking pattern matched. It says nothing about factual truth,
@@ -35,9 +36,10 @@ a model generation and people use all of them.
 
 The thresholds were set against dated text. In November 2026 the blocking rules
 failed 1.5 to 5 per cent of 600 human-written documents from a published
-parallel corpus, and 61.5 to 98 per cent of a 2024 model's continuations of the
+parallel corpus, and 62 to 98 per cent of a 2024 model's continuations of the
 same documents. They failed 17 per cent of 65 longer technical and business
-documents written before November 2022. Most human failures were filler such as
+documents written before November 2022, and 3 of 38 READMEs and reference
+documents from before 2020. Most human failures were filler such as
 `it should be noted` and `let's dive into`, which people also write. The
 [validation notes](https://github.com/hongymagic/hooman/blob/main/docs/validation.md)
 give the corpora, the per-rule rates and the limits of the measurement.
@@ -84,7 +86,6 @@ are emptier than others.
 | `rhythm.dashes` | review | Three em dashes in one sentence |
 | `rhythm.uniform` | review | Twelve or more sentences with length variation under 0.30 |
 | `inflation.significance` | error, review | Stock importance claims; conventional academic phrasings are advisory |
-| `inflation.promotion` | review | Sales words |
 | `inflation.vocabulary` | review | Stock words |
 | `inflation.cluster` | error | Four distinct stock or overused words within 100 words |
 | `inflation.intensifier` | review | Emphasis and sincerity words |
@@ -92,10 +93,17 @@ are emptier than others.
 | `inflation.tail` | review | A trailing `-ing` clause that glosses the sentence |
 | `inflation.tails` | error | Three or more trailing clauses at three or more per 1,000 words |
 | `inflation.hedge` | review | Stacked qualifiers |
+| `pitch.heading` | review | A heading that invites, teases or addresses the reader, or reads as a slogan |
+| `pitch.headings` | error | Three or more such headings that are a quarter or more of all headings |
+| `pitch.benefit` | review | A statement of what the reader gains where the mechanism would do |
+| `pitch.call` | review | A call to action |
+| `pitch.praise` | review | Praise words |
+| `particulars.share` | review | Twelve or more sentences, under 35 per cent with a figure, a name, code, a link or a quotation |
+| `particulars.run` | review | Four consecutive sentences in one paragraph or list item with none |
 | `formatting.labels` | review | Bold labels opening at least three list items and half the list |
 | `formatting.bold` | review | Eight or more bold spans at 15 or more per 1,000 words |
 | `formatting.titlecase` | review | Two or more title-case subheadings |
-| `formatting.headline` | review | Two or more subheadings that open like a story |
+| `formatting.instructions` | review | Two or more subheadings that give an instruction |
 | `formatting.rules` | review | Three or more horizontal rules |
 | `formatting.hashtags` | review | A run of four or more hashtags |
 | `formatting.emoji` | review | Emoji in headings or list items |
@@ -115,16 +123,23 @@ are emptier than others.
 | `interface.shorthand` | review | A string ending on a bare number |
 | `interface.pair` | review | Two clipped sentences in one string |
 
-Formatting rules apply to Markdown and plain text. HTML carries its formatting
-in tags the checker removes. Formatting findings never block and never count
-towards `density.signals`: whether a bold label is decoration or structure
-depends on the document, which the checker cannot see. Evidence findings do not
-count either, and an allowed finding stops counting too.
+Formatting and heading rules apply to Markdown and plain text. HTML carries its
+formatting in tags the checker removes. Formatting findings never block and
+never count towards `density.signals`: whether a bold label is decoration or
+structure depends on the document, which the checker cannot see. Evidence and
+particulars findings do not count either, and an allowed finding stops counting
+too.
+
+A heading reported as `pitch.heading` is one finding: a benefit or a call
+inside it is not reported again. The particulars count takes sentences of four
+words or more in paragraphs and list items. A sentence carries a particular
+when it holds a digit, an acronym, a capitalised word after its first, a
+quotation, inline code or a link. A list number and the capital that opens a
+sentence do not count.
 
 When `inflation.tails` fires, every trailing clause is listed as an
-`inflation.tail` finding so you can see them. Below the threshold only the
-glossing verbs are reported, because an occasional participle clause is
-ordinary English.
+`inflation.tail` finding. Below the threshold only the glossing verbs are
+reported, because an occasional participle clause is ordinary English.
 
 ## Interface profile
 
@@ -133,7 +148,7 @@ rules and the leftover rules that suit short strings, and skips every rule that
 needs sentences or paragraphs. Nothing in the `interface` family blocks. Short
 labels fall below what pattern rules can see: the profile catches a few common
 frames and cannot tell a good label from a poor one. Compare the strings with
-the product's existing screens, as [registers.md](registers.md) describes.
+the product's existing screens, as [forms.md](forms.md) describes.
 
 ## Extraction boundaries
 
@@ -175,29 +190,30 @@ or MDX renderer. Lazy blockquote continuations and complex nested Markdown can
 need manual review. A four-space indented prose line is treated as code.
 
 HTML extraction excludes head content, scripts, styles, templates, code, SVG,
-noscript and subtrees marked `hidden`, `aria-hidden="true"`, inline `display:none`
-or inline `visibility:hidden`. End tags that HTML lets an author leave out are
-supplied: a new `<li>` ends the item before it, and `<body>` ends an unclosed
-`<head>`. Inline tags retain adjoining text, block boundaries
+noscript and subtrees marked `hidden`, `aria-hidden="true"`, inline
+`display:none` or inline `visibility:hidden`. End tags that HTML lets an author
+leave out are supplied: a new `<li>` ends the item before it, and `<body>` ends
+an unclosed `<head>`. Inline tags retain adjoining text, block boundaries
 separate it, and HTML entities are decoded. Source line and column point back to
 the original file, including decoded entities. Attributes are not prose, apart
-from that tracking parameter.
-The checker does not run JavaScript, load CSS, evaluate classes or determine which
-responsive view is visible. Review a rendered page when those affect its copy.
+from a chat tool's tracking parameter. The checker does not run JavaScript, load
+CSS, evaluate classes or determine which responsive view is visible. Review a
+rendered page when those affect its copy.
 
 ## Automation contract
 
-Exit 0 means the selected gate passed; exit 1 means unresolved findings failed the
-gate; exit 2 means invalid input or an I/O error. Empty extracted prose is an error.
-If one file cannot be read, the command reports results for the other files and
-exits 2. A failure is never reported as a clean document.
+Exit 0 means the selected gate passed; exit 1 means unresolved findings failed
+the gate; exit 2 means invalid input or an I/O error. Empty extracted prose is
+an error. If one file cannot be read, the command reports results for the other
+files and exits 2. A failure is never reported as a clean document.
 
 `--json` emits one object with `schema_version: 2`, `passed`, `results` and
 `errors`. Each result contains the path, format, language, profile, word count,
 `passed`, the `blocking` and `review` counts, `stats` and `findings`. Under
 `--strict` each result's `passed` is false while review findings remain. `stats`
-holds the sentence count, mean sentence length, length variation and em dashes
-per 1,000 words. Each finding contains a rule ID, category, severity, source
+holds the sentence count, mean sentence length, length variation, em dashes
+per 1,000 words and `particulars_percent`, the share of counted sentences that
+carry a particular. Each finding contains a rule ID, category, severity, source
 line and column, matched text or a count, advice and an optional allowance.
 Input errors stay in the JSON report. Argument syntax errors use argparse's
 normal stderr output and exit 2.

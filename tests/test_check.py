@@ -322,14 +322,13 @@ The **lint** and the **scan** and the **pack** and the **ship** stages stayed.
             "formatting.labels",
             "formatting.bold",
             "formatting.titlecase",
-            "formatting.headline",
             "formatting.rules",
             "formatting.hashtags",
             "formatting.emoji",
         ):
             with self.subTest(rule=rule):
                 self.assertIn(rule, found)
-        plain = "## How to install\n\n## What is new\n\n- **Speed:** builds finish sooner.\n"
+        plain = "## How to install\n\n## What's new\n\n- **Speed:** builds finish sooner.\n"
         self.assertEqual(audit(plain, "markdown")["findings"], [])
         self.assertEqual(
             audit(
@@ -337,6 +336,128 @@ The **lint** and the **scan** and the **pack** and the **ship** stages stayed.
             )["findings"],
             [],
         )
+
+    def test_pitch_phrasing_stays_advisory(self):
+        cases = {
+            "The dashboard is powerful and intuitive.": "pitch.praise",
+            "The export helps you close the month.": "pitch.benefit",
+            "Tag each run so you can find it later.": "pitch.benefit",
+            "The checks let teams deploy with confidence.": "pitch.benefit",
+            "The importer makes it easy to move accounts.": "pitch.benefit",
+            "Set up the importer in minutes.": "pitch.benefit",
+            "Ready to move your accounts? Sign up today.": "pitch.call",
+        }
+        for source, rule in cases.items():
+            with self.subTest(source=source):
+                result = audit(source)
+                self.assertTrue(result["passed"])
+                self.assertIn(rule, rules(result, "review"))
+        for source in (
+            "The interval is reported with confidence limits of 95%.",
+            "The flag allows the caller to skip validation.",
+            "The job finishes in 4 minutes.",
+            "Tag each run so that the scheduler can find it.",
+            "A robust estimator ignores the outliers.",
+        ):
+            with self.subTest(source=source):
+                self.assertNotIn("pitch.benefit", rules(audit(source)))
+                self.assertNotIn("pitch.call", rules(audit(source)))
+
+    def test_headings_that_pitch_are_reported_one_by_one(self):
+        for heading in (
+            "Try the checker",
+            "Get started",
+            "Works where you work",
+            "Why Harbour",
+            "What it is built on",
+            "Ready to switch?",
+            "Passwords for the whole team, safely.",
+            "**Meet the importer**",
+        ):
+            with self.subTest(heading=heading):
+                result = audit(f"# tidewatch\n\n## {heading} ##\n\n{PLAIN}", "markdown")
+                self.assertEqual(rules(result), ["pitch.heading"])
+                self.assertTrue(result["passed"])
+                self.assertEqual(result["findings"][0]["text"], heading.strip("*"))
+        numbered = audit(f"## 3) Describe your changes\n\n{PLAIN}", "markdown")
+        self.assertEqual(
+            [(f["rule"], f["text"], f["column"]) for f in numbered["findings"]],
+            [("pitch.heading", "Describe your changes", 7)],
+        )
+        labels = (
+            "# tidewatch\n\n## Installation\n\n## Getting started\n\n## How to release"
+            "\n\n## What's new\n\n## What is an edition?\n\n## Build instructions\n\n"
+            "## Use cases\n\n## Tabs or spaces?\n\n" + PLAIN
+        )
+        self.assertEqual(audit(labels, "markdown")["findings"], [])
+
+    def test_pitch_headings_block_when_they_recur(self):
+        page = (
+            "# Harbour\n\n## Try it with your team\n\n## Why Harbour\n\n"
+            "## Get a quote\n\n## Pricing\n\n" + PLAIN
+        )
+        result = audit(page, "markdown")
+        self.assertIn("pitch.headings", rules(result, "error"))
+        self.assertEqual(rules(result).count("pitch.heading"), 3)
+        self.assertIn(
+            "3 of 5 headings address or sell to the reader",
+            [finding["text"] for finding in result["findings"]],
+        )
+        # Three in a long reference document are a small share of its headings.
+        reference = page + "".join(f"\n\n## Option {n}\n\n{PLAIN}" for n in range(9))
+        self.assertNotIn("pitch.headings", rules(audit(reference, "markdown")))
+        allowed = audit(
+            page, "markdown", allowances(["pitch.headings=Landing page; headings are the copy"])
+        )
+        self.assertTrue(allowed["passed"])
+
+    def test_instruction_headings_are_advisory(self):
+        steps = "# tidewatch\n\n## Install\n\n## Configure the bucket\n\n## Run it\n\n" + PLAIN
+        result = audit(steps, "markdown")
+        self.assertEqual(rules(result), ["formatting.instructions"])
+        self.assertTrue(result["passed"])
+        self.assertEqual(
+            result["findings"][0]["text"], "3 of 3 subheadings are instructions"
+        )
+        one = "# tidewatch\n\n## Install the binary\n\n## Options\n\n" + PLAIN
+        self.assertEqual(audit(one, "markdown")["findings"], [])
+
+    def test_particulars_are_counted_from_figures_names_code_and_links(self):
+        general = (
+            "The system keeps the work moving for the people who rely on it. It brings "
+            "the pieces together in a way that feels natural. Each part plays its role "
+            "and the whole becomes more than the parts. The approach is simple by "
+            "design. The team can spend its time on the work that matters most to it."
+        )
+        result = audit(f"{general}\n\n{general}\n\n{general}", "markdown")
+        self.assertTrue(result["passed"])
+        self.assertEqual(result["stats"]["particulars_percent"], 0)
+        found = {finding["rule"]: finding["text"] for finding in result["findings"]}
+        self.assertEqual(
+            found["particulars.share"],
+            "0 of 15 sentences carry a number, a name, code or a link",
+        )
+        self.assertEqual(rules(result).count("particulars.run"), 3)
+        self.assertEqual(
+            found["particulars.run"],
+            "5 sentences from: The system keeps the work moving for the people who rely on ",
+        )
+        self.assertNotIn("density.signals", rules(result))
+        specific = (
+            "The export writes 12 files a year. Run `make export` to start it. The "
+            "Billing page links to [the schedule](https://example.com/schedule). Priya "
+            "Nair approved the change on Tuesday. The API returns a 429 when the limit "
+            "is reached."
+        )
+        result = audit(f"{specific}\n\n{specific} Next.\n\n{specific} Last.", "markdown")
+        self.assertEqual(result["stats"]["particulars_percent"], 100)
+        self.assertNotIn("particulars.share", rules(result))
+        self.assertNotIn("particulars.run", rules(result))
+        # A list number and a capital at the head of a sentence are not particulars.
+        listed = "1. Keep the reader in mind when the work begins.\n2. Read it again the next day."
+        self.assertEqual(audit(listed, "markdown")["stats"]["particulars_percent"], 0)
+        # Fewer than twelve counted sentences is too few to judge a share.
+        self.assertNotIn("particulars.share", rules(audit(general, "markdown")))
 
     def test_soft_line_breaks_join_sentences(self):
         wrapped = "The hard part wasn't the\npipelines. It was the secrets."
@@ -745,6 +866,14 @@ class ContractTests(unittest.TestCase):
             "robust-and-seamless-" * 2400,
             "<a b" + " b" * 20000,
             '<a b="' * 10000,
+            "## " + "a b c " * 10000,
+            "## Why " + "a " * 30000,
+            "## Try a\n" * 6000,
+            "helps you so you can " * 6000,
+            "built for a a a " * 6000,
+            "ready to a " * 8000,
+            "A B c " * 10000,
+            "a b c d. " * 8000,
         )
         pages = (
             "<b>" * 8000 + "Text here." + "</i>" * 6000,
