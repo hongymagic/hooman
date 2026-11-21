@@ -1,19 +1,19 @@
-# Keeping the meaning
+# Fidelity
 
-Read this when comparing an edit with its source, or a draft with its brief.
-Rewrites change facts more often than writers expect: an audit of eleven
-commercial humanising tools found a number, date, name or quotation altered or
-dropped in 35 to 65 per cent of the documents that contained one. An edit that
-reads better and says something else has failed.
+`compare.py` lists what an edit changed in its source, or what a draft added to
+its list of facts. An audit of eleven commercial humanising tools found a
+number, date, name or quotation altered or dropped in 35 to 65 per cent of the
+documents that contained one. An edit that reads better and says something
+else has failed.
 
-## Run the comparison
+## Comparison
 
 Commands run from the skill directory. Python 3.12 or newer, no third-party
 dependencies, no network calls, and neither file is modified.
 
 ```sh
 python3 scripts/compare.py original.md revised.md
-python3 scripts/compare.py brief.txt draft.md --brief
+python3 scripts/compare.py facts.txt draft.md --brief
 python3 scripts/compare.py original.md revised.md --json
 ```
 
@@ -46,12 +46,12 @@ carries every token in full.
 The comparison reads everything a reader sees. Block quotations, nested list
 items and footnotes are compared here although the checker skips them, because
 an edit can change a figure in any of them. A block quotation is compared twice:
-its facts as prose and its wording as a quotation. In HTML that includes the
-page title, image `alt` text, text inside an SVG and anything marked only
-`aria-hidden`. Scripts, styles, templates, comments and elements hidden with
-`hidden` or an inline style are left out, in HTML and in the tags a Markdown
-file carries. Line endings, trailing spaces and the way a paragraph is wrapped
-make no difference.
+its facts as prose and its wording as a quotation. In HTML, what a reader sees
+includes the page title, image `alt` text, text inside an SVG and anything
+marked only `aria-hidden`. Scripts, styles, templates, comments and elements
+hidden with `hidden` or an inline style are left out, in HTML and in the tags a
+Markdown file carries. Line endings, trailing spaces and the way a paragraph is
+wrapped make no difference.
 
 Forms that say the same thing match. Numbers up to ninety-nine written as
 words equal their digits, so `three` equals `3` and `twenty-one` equals `21`.
@@ -97,26 +97,31 @@ unchanged text:
 The last three kinds measure how much was rewritten. A `sentences` line names
 an original sentence that left little trace: find where its claim went, or
 confirm it asserted nothing. A `vocabulary` line means the edit replaced much
-of the wording, which is where claims go missing unnoticed. Removing a contrast
-frame removes a negative, so a `negation` line is a prompt to confirm that what
-went was staging and that any true half of the contrast is still stated.
+of the wording, which is where claims go missing unnoticed. A `length` line
+means the text shrank or grew past the limits in the table: check a large cut
+for lost claims and a large gain for added ones.
 
-`--brief` treats the first file as the supplied facts. A draft may leave facts
-out or repeat them, so only additions are reported: a figure, link, quotation
-or name the brief never contained needs a source or has to go. A fact the brief
-gives in a code span, a code block or front matter counts as supplied when the
-draft states it in prose. The brief's own words count as supplied when the
-draft sets them as code or quotes them.
+Removing a contrast frame removes a negative, so a `negation` line is a prompt
+to confirm that what went was staging and that any true half of the contrast
+is still stated.
 
-## Account for every difference
+`--brief` treats the first file as the supplied facts: a brief, or the list
+written before drafting. A draft may leave facts out or repeat them, so only
+additions are reported: a figure, link, quotation or name the brief never
+contained needs a source or has to go. A fact the brief gives in a code span, a
+code block or front matter counts as supplied when the draft states it in prose.
+The brief's own words count as supplied when the draft sets them as code or
+quotes them.
+
+## Differences
 
 For each error line, either restore the original or be able to say why the
-change is right: the user asked for it, the original was wrong and the user confirmed the
-correction, or the claim is still stated in other words. Review lines are for
-reading: a retitled heading or a removed contrast will appear there, and so will
-an author's dashes or curly quotes that an edit flattened by accident. Then read
-both versions,
-because the script compares tokens and cannot see any of these:
+change is right: the user asked for it, the original was wrong and the user
+confirmed the correction, or the claim is still stated in other words. Review
+lines are for reading: a retitled heading or a removed contrast will appear
+there, and so will an author's dashes or curly quotes that an edit flattened by
+accident. Then read both versions, because the script compares tokens and cannot
+see any of these:
 
 - A possibility is not a commitment. `We may ship on Friday if Security
   approves` must not become `We will ship on Friday`.
@@ -145,7 +150,7 @@ The possibility, the dependency and the missing approval all survive. The
 comparison would report one modality shift for the added `if`, which is the
 kind of line to read and accept.
 
-## When the source is thin
+## Gaps in the source
 
 A vague sentence often wants a specific that the source does not hold. Use a
 detail only if it was supplied or you can point to where it is established.

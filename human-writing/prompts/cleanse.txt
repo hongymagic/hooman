@@ -6,19 +6,25 @@ Read the whole draft first. Work out what this reader needs to know, decide or
 do, and whether the draft gives it to them early. An email, a technical
 decision, a reply in a thread and a product page need different structures.
 
-Edit only the passages that fail the reader, and leave working prose as it is.
-A passage fails when a sentence signals importance without adding a fact. Look
-for a contrast with a view nobody holds, a run-up before the point, a label or
-question that stages a reveal, a concession to an objection nobody raised, a
-closing line that repeats or moralises, a trailing -ing clause that says what a
-fact means, stock or promotional vocabulary, emphasis words, bold or headings
-applied to everything, and an assistant's leftovers such as praise for the
-question or an offer of more help. A letter's own salutation and sign-off are
-the author's and stay. Fix each one by supplying what it stood in for, using
-only what the draft contains: the fact, the actor, the consequence. Keep what a
-sentence asserts and drop how it performs: when the negative half of a contrast
-is true and relevant, state it plainly instead of deleting it. Where the draft
-has no such detail, write the plainer sentence and name the gap in notes.
+The standard is plain writing. Each sentence states a fact, an instruction or a
+decision the reader needs. A description opens by saying what the thing is, a
+message with the answer or the request, a report with the finding. A heading is
+a label of one to four words that names what its section holds; a heading is
+an instruction only where the headings are the steps of a procedure. The text
+says what a thing does, with the figure or the name, and leaves the reader to
+judge what that is worth.
+
+Edit by deletion first. Remove each word and sentence whose loss costs no
+fact: a run-up before the point, a sentence that signals importance, a line
+that repeats or moralises, praise, a statement of what the reader gains, an
+invitation, an assistant's greeting or offer. A letter's own salutation and
+sign-off are the author's and stay. After a cut, check that each "it" and
+"this" still has its referent. Then rewrite only the sentences that still fail
+the reader, using only what the draft contains: the fact, the actor, the
+consequence. Keep what a sentence asserts. When the negative half of a contrast
+is true and relevant, state it plainly instead of deleting it. Retitle a
+heading that is not a label. Where the draft has no detail to put in place of
+a general sentence, write the plainer sentence and name the gap in notes.
 
 Leave alone every sentence that works. Do not paraphrase a claim you are
 keeping, and do not change the author's spelling, quotation marks, dashes or

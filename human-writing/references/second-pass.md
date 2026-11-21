@@ -1,25 +1,25 @@
 # A separate model edit
 
+`scripts/cleanse.py` sends a draft to a model of another family for an edit.
 Read this before using the helper. The pass is optional. A second model family
 has different defaults, so it can catch habits the first one repeats, but no
-study has tested that claim directly, and model judges share at least one
-habit: they prefer the contrast frame too. Treat its output as a candidate and
-put it through the same comparison as your own edit. The deterministic checker
-stays in the loop for that reason.
+study has tested that claim directly, and model judges share at least one habit:
+they prefer the contrast frame too. Treat its output as a candidate. The
+deterministic checker stays in the loop for that reason.
 
 The helper sends the draft to an installed CLI's model provider using the
 account already authenticated there. That provider's data handling and usage
 charges apply. Use it when the task authorises processing the draft with that
 provider. No API key is stored or requested by Hooman.
 
-It accepts English drafts and needs Python 3.12 or newer with a current Codex or
-Claude Code CLI. It runs from a temporary directory, sends the draft through
-stdin and keeps it out of process arguments, and disables session persistence.
-Codex runs in its read-only sandbox with shell execution disabled and without
-its user configuration file. It still loads a personal `AGENTS.md` from the
-Codex home directory, so those instructions reach the reviewer. Claude runs
-with customisations, tools and MCP servers disabled. Both CLIs need their own
-authentication and network access.
+The helper accepts English drafts and needs Python 3.12 or newer with a current
+Codex or Claude Code CLI. It runs from a temporary directory, sends the draft
+through stdin and keeps it out of process arguments, and disables session
+persistence. Codex runs in its read-only sandbox with shell execution disabled
+and without its user configuration file. It still loads a personal `AGENTS.md`
+from the Codex home directory, so those instructions reach the reviewer. Claude
+runs with customisations, tools and MCP servers disabled. Both CLIs need their
+own authentication and network access.
 
 Commands below run from the skill directory. Use a draft path that exists and a
 new output path:
@@ -38,9 +38,9 @@ Use `--reviewer codex` or `--reviewer claude` to choose explicitly. Same-family
 routing fails. Do not label an OpenAI draft `other` to bypass that check. If the
 writer's family is unknown, determine it before running an independent pass.
 `--model` selects a model supported by that CLI; otherwise the CLI's default
-applies. No model name is frozen into the helper. Codex is forced to its OpenAI
-provider; Claude installations must use an Anthropic model for this family label
-to be valid. Use `--audience` and `--purpose` to carry the actual brief.
+applies. Codex is forced to its OpenAI provider; Claude installations must use
+an Anthropic model for this family label to be valid. Use `--audience` and
+`--purpose` to carry the brief.
 
 The editorial prompt is [cleanse.txt](../prompts/cleanse.txt). To use it manually
 without a model call:

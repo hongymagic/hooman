@@ -1,25 +1,42 @@
 # human-writing
 
-Draft, edit or review prose for its reader. The skill checks a draft for patterns
-worth editing, edits the passages that fail, compares the result with the source
-so no fact drifts, and checks again.
+human-writing is an agent skill for writing, editing and reviewing English
+prose in a plain style. The model lists the facts, takes the established form
+for the kind of document and writes one fact to a sentence under label
+headings. Two scripts check the result and compare it with its source.
 
-Ask “Use human-writing to edit this draft”, “De-slop this copy”, or “Review this
-without rewriting it”. Supply the audience, the purpose and a real writing sample
-when you have them. Finished prose is the default output.
+## Contents
 
-- [SKILL.md](SKILL.md) is the workflow.
-- [Patterns](references/patterns.md) lists what to edit, the fix and when to keep it.
-- [Registers](references/registers.md) covers replies, documentation, updates,
-  posts, product copy and interface copy.
-- [Fidelity](references/fidelity.md) explains the before-and-after comparison.
-- [The checker](references/checker.md) documents rule IDs and output.
-- [The separate model helper](references/second-pass.md) is optional and uses an
-  installed, authenticated Codex or Claude CLI.
+| File | Content |
+| --- | --- |
+| [SKILL.md](SKILL.md) | The standard and the procedure |
+| [forms.md](references/forms.md) | Section labels for each kind of document |
+| [exemplars.md](references/exemplars.md) | Passages of human writing from 1863 to 2021 |
+| [patterns.md](references/patterns.md) | Each checker finding, its fix and when to keep the passage |
+| [fidelity.md](references/fidelity.md) | The comparison of an edit with its source |
+| [checker.md](references/checker.md) | Rule IDs, thresholds and output |
+| [second-pass.md](references/second-pass.md) | The optional edit by a second model family |
 
-The checker and the comparison run locally with Python 3.12 or newer and make no
-network calls. The instructions also work without execution, but a manual review
-cannot supply a measured result.
+## Requirements
 
-See the [project installation guide](https://github.com/hongymagic/hooman#install).
-This bundle is [MIT licensed](LICENSE).
+Python 3.12 or newer for the scripts. `check.py` and `compare.py` make no
+network calls. `cleanse.py` needs an installed, signed-in Codex or Claude CLI.
+Without script execution the instructions still apply, and no measured result
+is reported.
+
+## Installation
+
+See the
+[project installation guide](https://github.com/hongymagic/hooman#installation).
+
+## Usage
+
+Make a request such as “Use human-writing to edit this draft”, “Draft a status
+update from these facts” or “Review this without rewriting it”. Supply the
+reader, the purpose and a writing sample where there is one. The output is
+finished text.
+
+## Licence
+
+[MIT](LICENSE). The passages in exemplars.md carry their own terms, listed in
+that file.
